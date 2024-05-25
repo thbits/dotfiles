@@ -1,0 +1,117 @@
+# watch events on selected resources
+# requires linux "watch" command
+# change '-n' to adjust refresh time in seconds
+
+plugins:
+  watch-events:
+    shortCut: Shift-E
+    confirm: false
+    description: Get Events
+    scopes:
+    - all
+    command: sh
+    background: false
+    args:
+    - -c
+    - "watch -n 2 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"
+
+  #--- Create debug container for selected pod in current namespace
+  # See https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+  debug:
+    shortCut: Shift-D
+    description: Add debug container
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl debug -it -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.11 --share-processes -- bash"
+
+# View user-supplied values when the helm chart was created
+  helm-values:
+    shortCut: v
+    confirm: false
+    description: Values
+    scopes:
+    - helm
+    command: sh
+    background: false
+    args:
+    - -c
+    - "helm get values $COL-NAME -n $NAMESPACE --kube-context $CONTEXT | less"
+
+      #  stern:
+      #    shortCut: Ctrl-L
+      #    confirm: false
+      #    description: "Logs <Stern>"
+      #    scopes:
+      #      - pods
+      #    command: stern
+      #    background: false
+      #    args:
+      #      - --tail
+      #      - 50
+      #      - $FILTER
+      #      - -n
+      #      - $NAMESPACE
+      #      - --context
+      #      - $CONTEXT
+      #
+      #  stern-container:
+      #    shortCut: Ctrl-L
+      #    confirm: false
+      #    description: "Logs <Stern>"
+      #    scopes:
+      #      - containers
+      #    command: bash
+      #    background: false
+      #    args:
+      #      - -c
+      #      - "stern $POD -c ^$COL-NAME$ -n $NAMESPACE --context $CONTEXT --tail 50 | less -K"
+
+  log-less:
+    shortCut: Shift-L
+    description: "logs | less"
+    scopes:
+    - po
+    command: bash
+    background: false
+    args:
+    - -c
+    - '"$@" | less -K'
+    - dummy-arg
+    - kubectl
+    - logs
+    - $NAME
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT
+    - --kubeconfig
+    - $KUBECONFIG
+
+  log-less-container:
+    shortCut: Shift-L
+    description: "logs | less"
+    scopes:
+    - containers
+    command: bash
+    background: false
+    args:
+    - -c
+    - '"$@" | less -K'
+    - dummy-arg
+    - kubectl
+    - logs
+    - -f
+    - -c
+    - $NAME
+    - $POD
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT
+    - --kubeconfig
+    - $KUBECONFIG 
