@@ -150,6 +150,9 @@ bindkey -s '^s' 'tmux_last_session ^M'
 
 alias cs='/home/thalo/automate_input.expect'
 
+#set kubecolor
+command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
+
 source ~/.clisso_autocomplete.zsh
 
 eval "$(starship init zsh)"
