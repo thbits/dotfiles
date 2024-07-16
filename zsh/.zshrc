@@ -131,18 +131,18 @@ _gpt_engineer_completion() {
 compdef _gpt_engineer_completion gpt-engineer
 
 #set KUBECONFIG
-export KUBECONFIG=~/.kube/config:~/.kube/aws
+#export KUBECONFIG=~/.kube/config:~/.kube/aws
+export KUBECONFIG=~/.kube/aws
 
 #cloudlens
 alias cl='cloudlens'
 
 #aws-shell
-alias awsh='docker container run --rm -it -v /home/thalo/.aws:/home/aws/.aws rneder/aws-shell:2023.06.21'
+alias awsh='docker container run --rm -it -v ~/.aws:/home/aws/.aws rneder/aws-shell:2023.06.21'
 
 eval $(thefuck --alias)
 
 function tmux_last_session(){
-
     LAST_TMUX_SESSION=$(tmux list-sessions | awk -F ":" '{print$1}' | tail -n1);
     tmux attach -t $LAST_TMUX_SESSION
 }
@@ -153,6 +153,12 @@ alias cs='/home/thalo/automate_input.expect'
 #set kubecolor
 command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 
+#add krew to PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 source ~/.clisso_autocomplete.zsh
+
+#bat as cat
+command -v bat >/dev/null 2>&1 && alias cat="bat --style=plain --paging=never"
 
 eval "$(starship init zsh)"
