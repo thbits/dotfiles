@@ -161,4 +161,7 @@ source ~/.clisso_autocomplete.zsh
 #bat as cat
 command -v bat >/dev/null 2>&1 && alias cat="bat --style=plain --paging=never"
 
+#run bin as sudo
+alias bin='sudo bin'
+
 eval "$(starship init zsh)"

@@ -1,0 +1,50 @@
+{
+    "default_path": "/usr/local/bin",
+    "bins": {
+        "/usr/local/bin/bin": {
+            "path": "/usr/local/bin/bin",
+            "remote_name": "bin_0.18.0_linux_amd64",
+            "version": "v0.18.0",
+            "hash": "f7be80770444245ee5417a61e3d219dc19ee554f2668e55f8ad27228c0e8c933",
+            "url": "github.com/marcosnils/bin",
+            "provider": "github",
+            "package_path": ""
+        },
+        "/usr/local/bin/jless": {
+            "path": "/usr/local/bin/jless",
+            "remote_name": "jless",
+            "version": "v0.9.0",
+            "hash": "1d25b19fa8e88973370739aaa562b02dbfed46f7d5c71c3ba3e51a9683717d85",
+            "url": "github.com/PaulJuliusMartinez/jless",
+            "provider": "github",
+            "package_path": "jless"
+        },
+        "/usr/local/bin/k9s": {
+            "path": "/usr/local/bin/k9s",
+            "remote_name": "k9s",
+            "version": "v0.32.5",
+            "hash": "bd8361679b7796e1aad7d106268aba54684c08bd04ff160a5ea66bcea0d145f2",
+            "url": "github.com/derailed/k9s",
+            "provider": "github",
+            "package_path": "k9s"
+        },
+        "/usr/local/bin/stu": {
+            "path": "/usr/local/bin/stu",
+            "remote_name": "stu",
+            "version": "v0.5.1",
+            "hash": "09d7640f2fc03b8ea826c47262b4a6ca0f95d25e29eddbeb73e50826f29b0881",
+            "url": "github.com/lusingander/stu",
+            "provider": "",
+            "package_path": ""
+        },
+        "/usr/local/bin/yazi": {
+            "path": "/usr/local/bin/yazi",
+            "remote_name": "yazi",
+            "version": "v0.3.0",
+            "hash": "06c53ae34bbb6796a6db59e0fc74aee8aee4d619021785995c5a052ce5611957",
+            "url": "github.com/sxyazi/yazi",
+            "provider": "github",
+            "package_path": "yazi-x86_64-unknown-linux-gnu/yazi"
+        }
+    }
+}
