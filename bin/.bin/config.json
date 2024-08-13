@@ -10,6 +10,24 @@
             "provider": "github",
             "package_path": ""
         },
+        "/usr/local/bin/clisso": {
+            "path": "/usr/local/bin/clisso",
+            "remote_name": "clisso",
+            "version": "0.19.1",
+            "hash": "f4813d0445162f10b81adf3f324aa408771bedc2d066baf19cf50b5d393beca1",
+            "url": "github.com/allcloud-io/clisso",
+            "provider": "github",
+            "package_path": "clisso"
+        },
+        "/usr/local/bin/fzf": {
+            "path": "/usr/local/bin/fzf",
+            "remote_name": "fzf",
+            "version": "v0.54.3",
+            "hash": "91ad8e7cf4d562dacaf27e7d12e140c17f77d2453954158e7afb10d48e053255",
+            "url": "github.com/junegunn/fzf",
+            "provider": "github",
+            "package_path": "fzf"
+        },
         "/usr/local/bin/jless": {
             "path": "/usr/local/bin/jless",
             "remote_name": "jless",
@@ -45,6 +63,15 @@
             "url": "github.com/sxyazi/yazi",
             "provider": "github",
             "package_path": "yazi-x86_64-unknown-linux-gnu/yazi"
+        },
+        "/usr/local/bin/zoxide": {
+            "path": "/usr/local/bin/zoxide",
+            "remote_name": "zoxide",
+            "version": "v0.9.4",
+            "hash": "f876426b6880038b33723a59da79c5b1f41d2894779c8b27b5d0f1c472bb8787",
+            "url": "github.com/ajeetdsouza/zoxide",
+            "provider": "github",
+            "package_path": "zoxide"
         }
     }
 }

@@ -72,7 +72,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting autojump zsh-fzf-history-search)
+plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,12 +114,8 @@ mkd() {
 } 
 #unsetopt share_history
 
-. /usr/share/autojump/autojump.sh
-
 #set KUBECONFIG
 export KUBECONFIG=~/.kube/config:~/.kube/aws
-
-fpath=(/home/thalo/.oh-my-zsh/custom/completions /home/thalo/.oh-my-zsh/plugins/autojump /home/thalo/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thalo/.oh-my-zsh/plugins/timer /home/thalo/.oh-my-zsh/plugins/cp /home/thalo/.oh-my-zsh/plugins/docker /home/thalo/.oh-my-zsh/plugins/helm /home/thalo/.oh-my-zsh/plugins/thefuck /home/thalo/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thalo/.oh-my-zsh/plugins/compleat /home/thalo/.oh-my-zsh/plugins/kubectl /home/thalo/.oh-my-zsh/plugins/git /home/thalo/.oh-my-zsh/functions /home/thalo/.oh-my-zsh/completions /home/thalo/.oh-my-zsh/cache/completions /home/thalo/.oh-my-zsh/plugins/autojump /home/thalo/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thalo/.oh-my-zsh/plugins/timer /home/thalo/.oh-my-zsh/plugins/cp /home/thalo/.oh-my-zsh/plugins/docker /home/thalo/.oh-my-zsh/plugins/helm /home/thalo/.oh-my-zsh/plugins/thefuck /home/thalo/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thalo/.oh-my-zsh/plugins/compleat /home/thalo/.oh-my-zsh/plugins/kubectl /home/thalo/.oh-my-zsh/plugins/git /home/thalo/.oh-my-zsh/functions /home/thalo/.oh-my-zsh/completions /home/thalo/.oh-my-zsh/cache/completions /home/thalo/.oh-my-zsh/custom/completions /home/thalo/.oh-my-zsh/plugins/autojump /home/thalo/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thalo/.oh-my-zsh/plugins/timer /home/thalo/.oh-my-zsh/plugins/cp /home/thalo/.oh-my-zsh/plugins/docker /home/thalo/.oh-my-zsh/plugins/helm /home/thalo/.oh-my-zsh/plugins/thefuck /home/thalo/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thalo/.oh-my-zsh/plugins/compleat /home/thalo/.oh-my-zsh/plugins/kubectl /home/thalo/.oh-my-zsh/plugins/git /home/thalo/.oh-my-zsh/functions /home/thalo/.oh-my-zsh/completions /home/thalo/.oh-my-zsh/cache/completions /home/thalo/.oh-my-zsh/plugins/autojump /home/thalo/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/thalo/.oh-my-zsh/plugins/timer /home/thalo/.oh-my-zsh/plugins/cp /home/thalo/.oh-my-zsh/plugins/docker /home/thalo/.oh-my-zsh/plugins/helm /home/thalo/.oh-my-zsh/plugins/thefuck /home/thalo/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/thalo/.oh-my-zsh/plugins/compleat /home/thalo/.oh-my-zsh/plugins/kubectl /home/thalo/.oh-my-zsh/plugins/git /home/thalo/.oh-my-zsh/functions /home/thalo/.oh-my-zsh/completions /home/thalo/.oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/vendor-functions /usr/share/zsh/vendor-completions /usr/share/zsh/functions/Calendar /usr/share/zsh/functions/Chpwd /usr/share/zsh/functions/Completion /usr/share/zsh/functions/Completion/AIX /usr/share/zsh/functions/Completion/BSD /usr/share/zsh/functions/Completion/Base /usr/share/zsh/functions/Completion/Cygwin /usr/share/zsh/functions/Completion/Darwin /usr/share/zsh/functions/Completion/Debian /usr/share/zsh/functions/Completion/Linux /usr/share/zsh/functions/Completion/Mandriva /usr/share/zsh/functions/Completion/Redhat /usr/share/zsh/functions/Completion/Solaris /usr/share/zsh/functions/Completion/Unix /usr/share/zsh/functions/Completion/X /usr/share/zsh/functions/Completion/Zsh /usr/share/zsh/functions/Completion/openSUSE /usr/share/zsh/functions/Exceptions /usr/share/zsh/functions/MIME /usr/share/zsh/functions/Math /usr/share/zsh/functions/Misc /usr/share/zsh/functions/Newuser /usr/share/zsh/functions/Prompts /usr/share/zsh/functions/TCP /usr/share/zsh/functions/VCS_Info /usr/share/zsh/functions/VCS_Info/Backends /usr/share/zsh/functions/Zftp /usr/share/zsh/functions/Zle)
 
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'r:|?=**'
@@ -164,4 +160,8 @@ command -v bat >/dev/null 2>&1 && alias cat="bat --style=plain --paging=never"
 #run bin as sudo
 alias bin='sudo bin'
 
+#clisso loglevel to error
+alias clisso='clisso --log-level error'
+
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
