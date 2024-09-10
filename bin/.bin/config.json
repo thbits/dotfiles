@@ -13,19 +13,28 @@
         "/usr/local/bin/clisso": {
             "path": "/usr/local/bin/clisso",
             "remote_name": "clisso",
-            "version": "0.19.1",
-            "hash": "f4813d0445162f10b81adf3f324aa408771bedc2d066baf19cf50b5d393beca1",
-            "url": "github.com/allcloud-io/clisso",
-            "provider": "github",
+            "version": "0.19.2",
+            "hash": "d22d31fb6d879844478ac73d9d6c7215c981e782240cf6db88e890937a651c94",
+            "url": "https://github.com/allcloud-io/clisso/releases/tag/0.19.2",
+            "provider": "",
             "package_path": "clisso"
+        },
+        "/usr/local/bin/eks-node-viewer": {
+            "path": "/usr/local/bin/eks-node-viewer",
+            "remote_name": "eks-node-viewer_Linux_x86_64",
+            "version": "v0.6.0",
+            "hash": "a3a5ebbc535f15994f40f39105ce94699fd4db2088fa53edf1e111ab2fbe005c",
+            "url": "github.com/awslabs/eks-node-viewer",
+            "provider": "github",
+            "package_path": ""
         },
         "/usr/local/bin/fzf": {
             "path": "/usr/local/bin/fzf",
             "remote_name": "fzf",
-            "version": "v0.54.3",
-            "hash": "91ad8e7cf4d562dacaf27e7d12e140c17f77d2453954158e7afb10d48e053255",
-            "url": "github.com/junegunn/fzf",
-            "provider": "github",
+            "version": "v0.55.0",
+            "hash": "bc96f0fa94b85b6b79ab84cdd2c173304c3f4621aa7e5fa97b7f713de77ba3f8",
+            "url": "https://github.com/junegunn/fzf/releases/tag/v0.55.0",
+            "provider": "",
             "package_path": "fzf"
         },
         "/usr/local/bin/jless": {
@@ -49,19 +58,19 @@
         "/usr/local/bin/stu": {
             "path": "/usr/local/bin/stu",
             "remote_name": "stu",
-            "version": "v0.5.1",
-            "hash": "09d7640f2fc03b8ea826c47262b4a6ca0f95d25e29eddbeb73e50826f29b0881",
-            "url": "github.com/lusingander/stu",
+            "version": "v0.5.2",
+            "hash": "f979b1fb1690241de07b6aef9c4d642d3815c18ee5f95b2d86a99a0ca6a5801b",
+            "url": "https://github.com/lusingander/stu/releases/tag/v0.5.2",
             "provider": "",
-            "package_path": ""
+            "package_path": "stu"
         },
         "/usr/local/bin/yazi": {
             "path": "/usr/local/bin/yazi",
             "remote_name": "yazi",
-            "version": "v0.3.0",
-            "hash": "06c53ae34bbb6796a6db59e0fc74aee8aee4d619021785995c5a052ce5611957",
-            "url": "github.com/sxyazi/yazi",
-            "provider": "github",
+            "version": "v0.3.3",
+            "hash": "c0a78dd8fd3c74b75394f924a6bd7929c358967cfb578fb9958319c1e6b337d4",
+            "url": "https://github.com/sxyazi/yazi/releases/tag/v0.3.3",
+            "provider": "",
             "package_path": "yazi-x86_64-unknown-linux-gnu/yazi"
         },
         "/usr/local/bin/zoxide": {

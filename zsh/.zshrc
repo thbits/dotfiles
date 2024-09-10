@@ -163,5 +163,9 @@ alias bin='sudo bin'
 #clisso loglevel to error
 alias clisso='clisso --log-level error'
 
+#eks-node-viewer with current context for multiple region/profiles
+alias eksnv='env $(kubectl config view --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer'
+
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
