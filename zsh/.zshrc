@@ -1,3 +1,4 @@
+#16384,zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin:
@@ -114,21 +115,8 @@ mkd() {
 } 
 #unsetopt share_history
 
-#set KUBECONFIG
-export KUBECONFIG=~/.kube/config:~/.kube/aws
-
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list 'r:|?=**'
-
-#compdef gpt-engineer
-_gpt_engineer_completion() {
-  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _GPT_ENGINEER_COMPLETE=complete_zsh gpt-engineer)
-}
-compdef _gpt_engineer_completion gpt-engineer
-
-#set KUBECONFIG
-#export KUBECONFIG=~/.kube/config:~/.kube/aws
-export KUBECONFIG=~/.kube/aws
+#autoload -Uz compinit && compinit
+#zstyle ':completion:*' matcher-list 'r:|?=**' use-cache on
 
 #cloudlens
 alias cl='cloudlens'
@@ -141,6 +129,7 @@ eval $(thefuck --alias)
 function tmux_last_session(){
     LAST_TMUX_SESSION=$(tmux list-sessions | awk -F ":" '{print$1}' | tail -n1);
     tmux attach -t $LAST_TMUX_SESSION
+    if [[ $? -eq 1 ]] && tmux
 }
 bindkey -s '^s' 'tmux_last_session ^M'
 
@@ -164,8 +153,22 @@ alias bin='sudo bin'
 alias clisso='clisso --log-level error'
 
 #eks-node-viewer with current context for multiple region/profiles
-alias eksnv='env $(kubectl config view --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer'
+#alias eksnv='env $(kubectl config view --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer --resources cpu,memory --extra-labels karpenter.sh/nodepool,eks-node-viewer/node-age --node-sort=creation=dsc'
+alias eksnv='env $(kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer --context $CONTEXT --resources cpu,memory --extra-labels karpenter.sh/nodepool,eks-node-viewer/node-age --node-sort=creation=dsc'
 
+alias cg='function _cg(){ wslview "https://chatgpt.com/?q=$*"; };_cg'
+
+alias v='nvim'
+alias vcfg='nvim ~/.config/nvim'
+
+#set nvim as default kubernetes editor
+export KUBE_EDITOR="nvim"
+
+export KUBECONFIG=~/.kube/config:~/.kube/aws
+
+#start starship.rs
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
+#start zeoxide
+eval "$(zoxide init zsh)"
+#zprof
