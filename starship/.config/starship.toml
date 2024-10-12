@@ -163,9 +163,8 @@ detect_files = ['.k8s']
 [[kubernetes.contexts]]
 context_pattern = 'arn:aws:eks:(?P<var_region>[^:]+):\d+:cluster/(?P<var_cluster>[^/]+)$'
 context_alias = "$var_cluster ($var_region)"
-#[kubernetes.user_aliases]
-#"dev.local.cluster.k8s" = "dev"
-#"root/.*" = "root"
+# context_pattern = 'eks_(?P<var_cluster>.+)'
+# context_alias = "$var_cluster"
 
 [helm]
 symbol = "⛵"
