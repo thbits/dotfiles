@@ -1,5 +1,5 @@
 k9s:
-  liveViewAutoRefresh: false
+  liveViewAutoRefresh: true
   screenDumpDir: /home/thalo/.local/state/k9s/screen-dumps
   refreshRate: 2
   maxConnRetry: 5
@@ -9,11 +9,11 @@ k9s:
     enableMouse: false
     headless: false
     logoless: false
-    crumbsless: true
-    reactive: false
+    crumbsless: false
+    reactive: true
     noIcons: false
     defaultsToFullScreen: false
-    skin: tomskin
+    skin: catppuccin
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:
@@ -28,8 +28,8 @@ k9s:
       namespaces: []
       labels: {}
   logger:
-    tail: 100
-    buffer: 5000
+    tail: 1000
+    buffer: 50000
     sinceSeconds: -1
     textWrap: false
     showTime: false
