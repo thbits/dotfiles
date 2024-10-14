@@ -73,7 +73,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search)
+plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search zsh-tmux-auto-title)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,7 +115,7 @@ mkd() {
 } 
 #unsetopt share_history
 
-#autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit
 #zstyle ':completion:*' matcher-list 'r:|?=**' use-cache on
 
 #cloudlens
@@ -129,7 +129,7 @@ eval $(thefuck --alias)
 function tmux_last_session(){
     LAST_TMUX_SESSION=$(tmux list-sessions | awk -F ":" '{print$1}' | tail -n1);
     tmux attach -t $LAST_TMUX_SESSION
-    if [[ $? -eq 1 ]] && tmux
+    if [[ $? -eq 1 ]] && tmux new-session -s default
 }
 bindkey -s '^s' 'tmux_last_session ^M'
 
@@ -165,6 +165,8 @@ alias vcfg='nvim ~/.config/nvim'
 export KUBE_EDITOR="nvim"
 
 export KUBECONFIG=~/.kube/config:~/.kube/aws
+
+DISABLE_AUTO_TITLE=true
 
 #start starship.rs
 eval "$(starship init zsh)"
