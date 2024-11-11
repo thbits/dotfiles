@@ -80,7 +80,8 @@ plugins:
     background: false
     args:
     - -c
-    - '"$@" | less -K'
+    # - '"$@" | less -KR'
+    - '"$@" | bat --paging=always --style=plain -l log'
     - dummy-arg
     - kubectl
     - logs
@@ -127,3 +128,24 @@ plugins:
     - -c
     - |
       env $(kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer --context $CONTEXT --resources cpu,memory --extra-labels karpenter.sh/nodepool,eks-node-viewer/node-age --node-sort=creation=dsc
+
+  node-shell:
+    # Define a mnemonic to invoke the plugin
+    # Shortcut key to execute the plugin (e.g., 's' key)
+    shortCut: s  
+    # Whether or not to prompt for user confirmation before executing the plugin
+    confirm: false
+    # Description of the plugin (displayed in the k9s UI)
+    description: "Node shell"
+    # Collections of views that support this shortcut. (You can use `all`)
+    # `node` indicates that the plugin operates on `node` kubernetes resources
+    scopes:
+      - node
+    # The command to run upon invocation. Can use Krew plugins here too!
+    command: sh
+    # Whether or not to run the command in background mode
+    background: false
+    # Defines the command arguments
+    args:
+      - -c
+      - "kubectl node-shell $NAME --context $CONTEXT"
