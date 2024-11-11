@@ -6,8 +6,8 @@ return {
 		config = function()
 			require("bufferline").setup({})
 			-- Use the bufferline recommended mappings
-			vim.api.nvim_set_keymap('n', ']', ':bnext<CR>', { noremap = true, silent = true })
-			vim.api.nvim_set_keymap('n', '[', ':bprevious<CR>', { noremap = true, silent = true })
+			vim.api.nvim_set_keymap('n', '}', ':bnext<CR>', { noremap = true, silent = true, nowait = true })
+			vim.api.nvim_set_keymap('n', '{', ':bprevious<CR>', { noremap = true, silent = true, nowait = true})
 		end,
 	},
 }

@@ -16,7 +16,6 @@ return {
           "helm_ls",
           "groovyls",
           "ansiblels",
-          "bashls",
           "jinja_lsp",
           "jqls",
           "grammarly",
@@ -43,7 +42,6 @@ return {
       })
       lspconfig.spectral.setup({})
       lspconfig.ansiblels.setup({})
-      lspconfig.bashls.setup({})
       lspconfig.jinja_lsp.setup({})
       lspconfig.jqls.setup({})
       lspconfig.grammarly.setup({})

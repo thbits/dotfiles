@@ -10,7 +10,6 @@ return {
       "LazyGitFilter",
       "LazyGitFilterCurrentFile",
     },
-    -- optional for floating window border decoration
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -31,6 +30,19 @@ return {
       })
       vim.keymap.set("n", "<leader>gd", ":DiffviewFileHistory %<CR>", {})
       vim.keymap.set("n", "<leader>gdc", ":DiffviewClose<CR>", {})
+    end,
+  },
+  -- gitsigns
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup({
+        current_line_blame = true,
+        current_line_blame_opts = {
+          delay = 250,
+        },
+      })
+      vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", {})
     end,
   },
 }
