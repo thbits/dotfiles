@@ -3,12 +3,13 @@
     "bins": {
         "/usr/local/bin/bin": {
             "path": "/usr/local/bin/bin",
-            "remote_name": "bin_0.18.0_linux_amd64",
-            "version": "v0.18.0",
-            "hash": "f7be80770444245ee5417a61e3d219dc19ee554f2668e55f8ad27228c0e8c933",
-            "url": "github.com/marcosnils/bin",
-            "provider": "github",
-            "package_path": ""
+            "remote_name": "bin_0.19.0_linux_amd64",
+            "version": "v0.19.0",
+            "hash": "475cec6a7784099e6eec8d8855f7dff5805189f4da8890d5aa648c9e47a21bde",
+            "url": "https://github.com/marcosnils/bin/releases/tag/v0.19.0",
+            "provider": "",
+            "package_path": "",
+            "pinned": false
         },
         "/usr/local/bin/clisso": {
             "path": "/usr/local/bin/clisso",
@@ -17,7 +18,8 @@
             "hash": "2252dc559e60695b336fc07b16a6ddcbbf4e78da9a5cb47da35ea33a7da287c6",
             "url": "https://github.com/allcloud-io/clisso/releases/tag/0.19.4",
             "provider": "",
-            "package_path": "clisso"
+            "package_path": "clisso",
+            "pinned": false
         },
         "/usr/local/bin/delta": {
             "path": "/usr/local/bin/delta",
@@ -26,16 +28,18 @@
             "hash": "fad23fba816fec22fc808717a2b4e149d2651e76491f8dd020b4b82d7829a9da",
             "url": "github.com/dandavison/delta",
             "provider": "github",
-            "package_path": "delta-0.18.2-x86_64-unknown-linux-gnu/delta"
+            "package_path": "delta-0.18.2-x86_64-unknown-linux-gnu/delta",
+            "pinned": false
         },
         "/usr/local/bin/ec2-instance-selector": {
             "path": "/usr/local/bin/ec2-instance-selector",
             "remote_name": "ec2-instance-selector-linux-amd64",
-            "version": "v2.4.1",
-            "hash": "dfd6560a39c98b97ab99a34fc261b6209fc4eec87b0bc981d052f3b13705e9ff",
-            "url": "github.com/aws/amazon-ec2-instance-selector",
-            "provider": "github",
-            "package_path": ""
+            "version": "v3.0.0",
+            "hash": "1e3db6938f667b48d506d23045310b97de2bb22cde25b440cf039c3a40b72d0a",
+            "url": "https://github.com/aws/amazon-ec2-instance-selector/releases/tag/v3.0.0",
+            "provider": "",
+            "package_path": "",
+            "pinned": false
         },
         "/usr/local/bin/eks-node-viewer": {
             "path": "/usr/local/bin/eks-node-viewer",
@@ -44,16 +48,18 @@
             "hash": "09de7e618fd543c1a3c1a30255ea2799b0615baeba045dd533093b8ea08e1d34",
             "url": "https://github.com/awslabs/eks-node-viewer/releases/tag/v0.7.0",
             "provider": "",
-            "package_path": ""
+            "package_path": "",
+            "pinned": false
         },
         "/usr/local/bin/fzf": {
             "path": "/usr/local/bin/fzf",
             "remote_name": "fzf",
-            "version": "v0.55.0",
-            "hash": "bc96f0fa94b85b6b79ab84cdd2c173304c3f4621aa7e5fa97b7f713de77ba3f8",
-            "url": "https://github.com/junegunn/fzf/releases/tag/v0.55.0",
+            "version": "v0.56.0",
+            "hash": "d70f43b3f1900123c4d3de5a0aafd12ec0b9d9a222df8d90ee6aee773e740f2c",
+            "url": "https://github.com/junegunn/fzf/releases/tag/v0.56.0",
             "provider": "",
-            "package_path": "fzf"
+            "package_path": "fzf",
+            "pinned": false
         },
         "/usr/local/bin/jless": {
             "path": "/usr/local/bin/jless",
@@ -62,7 +68,8 @@
             "hash": "1d25b19fa8e88973370739aaa562b02dbfed46f7d5c71c3ba3e51a9683717d85",
             "url": "github.com/PaulJuliusMartinez/jless",
             "provider": "github",
-            "package_path": "jless"
+            "package_path": "jless",
+            "pinned": false
         },
         "/usr/local/bin/k9s": {
             "path": "/usr/local/bin/k9s",
@@ -71,7 +78,8 @@
             "hash": "bd8361679b7796e1aad7d106268aba54684c08bd04ff160a5ea66bcea0d145f2",
             "url": "github.com/derailed/k9s",
             "provider": "github",
-            "package_path": "k9s"
+            "package_path": "k9s",
+            "pinned": false
         },
         "/usr/local/bin/lazygit": {
             "path": "/usr/local/bin/lazygit",
@@ -80,7 +88,8 @@
             "hash": "bd0459d3109304d5bbfa938dbe7f76e68f7c17df948a5d3ea7496c0dbf2748e9",
             "url": "github.com/jesseduffield/lazygit",
             "provider": "github",
-            "package_path": "lazygit"
+            "package_path": "lazygit",
+            "pinned": false
         },
         "/usr/local/bin/stu": {
             "path": "/usr/local/bin/stu",
@@ -89,7 +98,28 @@
             "hash": "a750a7ba58808bc7381233bf431710261f545c4f13a856ed093e3bf82768614d",
             "url": "https://github.com/lusingander/stu/releases/tag/v0.6.4",
             "provider": "",
-            "package_path": "stu"
+            "package_path": "stu",
+            "pinned": false
+        },
+        "/usr/local/bin/ttyd": {
+            "path": "/usr/local/bin/ttyd",
+            "remote_name": "ttyd.x86_64",
+            "version": "1.7.7",
+            "hash": "8a217c968aba172e0dbf3f34447218dc015bc4d5e59bf51db2f2cd12b7be4f55",
+            "url": "github.com/tsl0922/ttyd",
+            "provider": "github",
+            "package_path": "",
+            "pinned": false
+        },
+        "/usr/local/bin/vhs": {
+            "path": "/usr/local/bin/vhs",
+            "remote_name": "vhs",
+            "version": "v0.8.0",
+            "hash": "e631ae217380a1d1b2d0d67e2fdd4182f46d330f6f266fbe79b750272a878469",
+            "url": "github.com/charmbracelet/vhs",
+            "provider": "github",
+            "package_path": "vhs_0.8.0_Linux_x86_64/vhs",
+            "pinned": false
         },
         "/usr/local/bin/yazi": {
             "path": "/usr/local/bin/yazi",
@@ -98,7 +128,8 @@
             "hash": "c0a78dd8fd3c74b75394f924a6bd7929c358967cfb578fb9958319c1e6b337d4",
             "url": "https://github.com/sxyazi/yazi/releases/tag/v0.3.3",
             "provider": "",
-            "package_path": "yazi-x86_64-unknown-linux-gnu/yazi"
+            "package_path": "yazi-x86_64-unknown-linux-gnu/yazi",
+            "pinned": false
         },
         "/usr/local/bin/zoxide": {
             "path": "/usr/local/bin/zoxide",
@@ -107,7 +138,8 @@
             "hash": "b652df2979a260f1d8abfd0d956ed0a4c7f67827c9ddc07415e862afba0c71b4",
             "url": "https://github.com/ajeetdsouza/zoxide/releases/tag/v0.9.6",
             "provider": "",
-            "package_path": "zoxide"
+            "package_path": "zoxide",
+            "pinned": false
         }
     }
 }
