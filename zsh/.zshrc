@@ -165,10 +165,30 @@ alias eksnv='env $(kubectl config view --context $CONTEXT --minify -o json | jq 
 
 alias cg='function _cg(){ wslview "https://chatgpt.com/?q=$*"; };_cg'
 
-alias v='nvim'
+# alias v='nvim'
+v() {
+  if [[ -n "$1" ]]; then
+    nvim "$1"
+  else
+    local file
+    file=$(tv) || return
+    if [[ -d "$file" ]]; then
+      cd "$file"
+    elif [[ -f "$file" ]]; then
+      nvim "$file"
+    elif [[ -z "$file" ]]; then
+      pkill tv
+    # else 
+    #   exit 0
+    fi
+  fi
+}
+
 alias vcfg='nvim ~/.config/nvim'
 
-#set nvim as default kubernetes editor
+#set nvim as default editor
+alias vi='nvin'
+export EDITOR="nvim"
 export KUBE_EDITOR="nvim"
 
 export KUBECONFIG=~/.kube/config:~/.kube/aws
