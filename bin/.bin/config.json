@@ -3,10 +3,20 @@
     "bins": {
         "/usr/local/bin/bin": {
             "path": "/usr/local/bin/bin",
-            "remote_name": "bin_0.19.0_linux_amd64",
-            "version": "v0.19.0",
-            "hash": "475cec6a7784099e6eec8d8855f7dff5805189f4da8890d5aa648c9e47a21bde",
-            "url": "https://github.com/marcosnils/bin/releases/tag/v0.19.0",
+            "remote_name": "bin_0.19.1_linux_amd64",
+            "version": "v0.19.1",
+            "hash": "1207be420c4fb9e24de5604314d6b4b89834a843aed0f6651ac4659820bc7f17",
+            "url": "https://github.com/marcosnils/bin/releases/tag/v0.19.1",
+            "provider": "",
+            "package_path": "",
+            "pinned": false
+        },
+        "/usr/local/bin/calicoctl": {
+            "path": "/usr/local/bin/calicoctl",
+            "remote_name": "calicoctl-linux-amd64",
+            "version": "v3.29.1",
+            "hash": "2ac849181cb1fb40c61c06d075711025cdb909d80562d078cc548d50a0edcd3d",
+            "url": "https://github.com/projectcalico/calico/releases/tag/v3.29.1",
             "provider": "",
             "package_path": "",
             "pinned": false
@@ -14,12 +24,12 @@
         "/usr/local/bin/clisso": {
             "path": "/usr/local/bin/clisso",
             "remote_name": "clisso",
-            "version": "0.19.4",
-            "hash": "2252dc559e60695b336fc07b16a6ddcbbf4e78da9a5cb47da35ea33a7da287c6",
-            "url": "https://github.com/allcloud-io/clisso/releases/tag/0.19.4",
-            "provider": "",
+            "version": "0.20.0",
+            "hash": "16922032c7c49adf1eb18c1eb75a850fe60c4d9b6fe31444ce922bd838dc8930",
+            "url": "github.com/allcloud-io/clisso/releases/tag/0.20.0",
+            "provider": "github",
             "package_path": "clisso",
-            "pinned": false
+            "pinned": true
         },
         "/usr/local/bin/delta": {
             "path": "/usr/local/bin/delta",
@@ -44,9 +54,9 @@
         "/usr/local/bin/eks-node-viewer": {
             "path": "/usr/local/bin/eks-node-viewer",
             "remote_name": "eks-node-viewer_Linux_x86_64",
-            "version": "v0.7.0",
-            "hash": "09de7e618fd543c1a3c1a30255ea2799b0615baeba045dd533093b8ea08e1d34",
-            "url": "https://github.com/awslabs/eks-node-viewer/releases/tag/v0.7.0",
+            "version": "v0.7.1",
+            "hash": "8dfede77cde236b660137b2881f0de003f860b5e058251cc1315f73ce166b885",
+            "url": "https://github.com/awslabs/eks-node-viewer/releases/tag/v0.7.1",
             "provider": "",
             "package_path": "",
             "pinned": false
@@ -54,9 +64,9 @@
         "/usr/local/bin/fzf": {
             "path": "/usr/local/bin/fzf",
             "remote_name": "fzf",
-            "version": "v0.56.0",
-            "hash": "d70f43b3f1900123c4d3de5a0aafd12ec0b9d9a222df8d90ee6aee773e740f2c",
-            "url": "https://github.com/junegunn/fzf/releases/tag/v0.56.0",
+            "version": "v0.57.0",
+            "hash": "ef214ac0dcfa4907729aa8d18591ea3cc80991b7a15256a42e7804948b7eace4",
+            "url": "https://github.com/junegunn/fzf/releases/tag/v0.57.0",
             "provider": "",
             "package_path": "fzf",
             "pinned": false
@@ -74,10 +84,10 @@
         "/usr/local/bin/k9s": {
             "path": "/usr/local/bin/k9s",
             "remote_name": "k9s",
-            "version": "v0.32.5",
-            "hash": "bd8361679b7796e1aad7d106268aba54684c08bd04ff160a5ea66bcea0d145f2",
-            "url": "github.com/derailed/k9s",
-            "provider": "github",
+            "version": "v0.32.7",
+            "hash": "58f9368306ba760756112a290a09af7019b2e64d530485979a5971e67565dd54",
+            "url": "https://github.com/derailed/k9s/releases/tag/v0.32.7",
+            "provider": "",
             "package_path": "k9s",
             "pinned": false
         },
@@ -94,9 +104,9 @@
         "/usr/local/bin/stu": {
             "path": "/usr/local/bin/stu",
             "remote_name": "stu",
-            "version": "v0.6.4",
-            "hash": "a750a7ba58808bc7381233bf431710261f545c4f13a856ed093e3bf82768614d",
-            "url": "https://github.com/lusingander/stu/releases/tag/v0.6.4",
+            "version": "v0.6.5",
+            "hash": "a96371ef11dedff9b37ee993a99b9cedcb54a357a3cebd99370fc72560bba783",
+            "url": "https://github.com/lusingander/stu/releases/tag/v0.6.5",
             "provider": "",
             "package_path": "stu",
             "pinned": false
@@ -109,6 +119,16 @@
             "url": "github.com/tsl0922/ttyd",
             "provider": "github",
             "package_path": "",
+            "pinned": false
+        },
+        "/usr/local/bin/tv": {
+            "path": "/usr/local/bin/tv",
+            "remote_name": "tv",
+            "version": "0.8.0",
+            "hash": "bf917d1155bc7afdd9afeb5cf9bc6d692eba3d0c6927c5a4ab327525c9d7231a",
+            "url": "https://github.com/alexpasmantier/television/releases/tag/0.8.0",
+            "provider": "",
+            "package_path": "tv",
             "pinned": false
         },
         "/usr/local/bin/vhs": {
@@ -124,9 +144,9 @@
         "/usr/local/bin/yazi": {
             "path": "/usr/local/bin/yazi",
             "remote_name": "yazi",
-            "version": "v0.3.3",
-            "hash": "c0a78dd8fd3c74b75394f924a6bd7929c358967cfb578fb9958319c1e6b337d4",
-            "url": "https://github.com/sxyazi/yazi/releases/tag/v0.3.3",
+            "version": "v0.4.1",
+            "hash": "d47dfc5a3da55ec899e6e63de042f30510be8db6cc7eef777a8812ef960db129",
+            "url": "https://github.com/sxyazi/yazi/releases/tag/v0.4.1",
             "provider": "",
             "package_path": "yazi-x86_64-unknown-linux-gnu/yazi",
             "pinned": false
