@@ -15,4 +15,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 	},
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+  }
 }

@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     -- Set environment variables with password in plain text
     vim.env.JENKINS_USER_ID = "admin"
     vim.env.JENKINS_URL = "http://localhost:8081"
-    vim.env.JENKINS_PASSWORD = "4f534631b2474b4e8ae72f028137a2df"
+    vim.env.JENKINS_PASSWORD = "8b9c0abcd57d4215904db4a507843f6f"
     require("jenkinsfile_linter").validate()
   end,
 })
