@@ -89,3 +89,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
   end,
 })
+
+-- Remove carriage returns (^M)
+function RemoveCarriageReturns()
+  vim.api.nvim_command("%s/\\r//g")
+end
+
+vim.api.nvim_create_user_command("FixCR", RemoveCarriageReturns, {})
+vim.api.nvim_set_keymap("n", "<leader>m", ":FixCR<CR>", { noremap = true, silent = true })
+
+-- Keymaps to move between buffers
+vim.api.nvim_set_keymap("n", "}", ":bnext<CR>", { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap("n", "{", ":bprevious<CR>", { noremap = true, silent = true, nowait = true })
+vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true })
