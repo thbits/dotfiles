@@ -1,5 +1,5 @@
 k9s:
-  liveViewAutoRefresh: true
+  liveViewAutoRefresh: false
   screenDumpDir: /home/thalo/.local/state/k9s/screen-dumps
   refreshRate: 2
   maxConnRetry: 5
@@ -10,7 +10,7 @@ k9s:
     headless: false
     logoless: false
     crumbsless: false
-    reactive: true
+    reactive: false
     noIcons: false
     defaultsToFullScreen: false
     skin: catppuccin
