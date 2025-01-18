@@ -1,5 +1,3 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh"
 #16384,zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -76,8 +74,8 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search zsh-tmux-auto-title fzf-tab wsl-notify-zsh)
-plugins=(git kubectl compleat zsh-autosuggestions thefuck helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search zsh-tmux-auto-title fzf-tab)
+# plugins=(git kubectl compleat zsh-autosuggestions helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search fzf-tab wsl-notify-zsh)
+plugins=(git kubectl compleat zsh-autosuggestions helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search fzf-tab ohmyzsh-full-autoupdate)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -191,9 +189,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export KUBECONFIG=~/.kube/config:~/.kube/aws
 
-DISABLE_AUTO_TITLE=true
-
-eval $(thefuck --alias)
+# DISABLE_AUTO_TITLE=true
 
 #start starship.rs
 eval "$(starship init zsh)"
@@ -206,10 +202,3 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
 #zprof
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"
