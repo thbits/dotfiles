@@ -166,28 +166,63 @@ function tmux_last_session(){
 }
 bindkey -s '^s' 'tmux_last_session ^M'
 
+# Function to open files with Neovim or navigate directories using fzf with bat preview
 v() {
   if [[ -n "$1" ]]; then
+    # If an argument is provided, open it with Neovim
     nvim "$1"
   else
-    local file
-    file=$(tv) || return
-    if [[ -d "$file" ]]; then
-      cd "$file"
-    elif [[ -f "$file" ]]; then
-      nvim "$file"
-    elif [[ -z "$file" ]]; then
-      pkill tv
-    else 
-      exit 0
+    # Ensure 'fd' is installed
+    if ! command -v fd &> /dev/null; then
+      echo "Error: 'fd' is not installed. Please install it to use this function."
+      return 1
+    fi
+
+    # Ensure 'bat' is installed
+    if ! command -v bat &> /dev/null; then
+      echo "Error: 'bat' is not installed. Please install it to use the preview feature."
+      return 1
+    fi
+
+    # Use fd to list both files and directories, then pipe to fzf
+    local selection
+    selection=$(fd --type f --type d --hidden --follow --exclude .git | fzf \
+      --preview 'if [[ -f {} ]]; then bat --theme="Catppuccin Mocha" --style=numbers --color=always {}; else echo "📁 Directory: {}"; fi' \
+      --preview-window=right:60% \
+      --layout=reverse \
+      --height=80% \
+      --border \
+      --prompt="🔍 Select file or directory: " \
+      --ansi) || return
+    # Perform actions based on the type of selection
+    if [[ -d "$selection" ]]; then
+      # If a directory is selected, change into it
+      cd "$selection"
+    elif [[ -f "$selection" ]]; then
+      # If a file is selected, open it with Neovim
+      nvim "$selection"
+    else
+      # If no valid selection is made, provide feedback
+      echo "No valid selection made."
+      return
     fi
   fi
 }
 
+### Override config files path that are not in ~/.config ###
+export STU_ROOT_DIR="${HOME}/.config/stu"
+
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-export KUBECONFIG=~/.kube/config:~/.kube/aws
+# export KUBECONFIG=~/.kube/config:~/.kube/aws
+export KUBECONFIG=~/.kube/config
+
+# Kubeswitch
+source <(switcher init zsh)
+alias s='switch > /dev/null 2> >(grep -vE "WARN|warning")'
+source <(switch completion zsh)
+switch . > /dev/null 2>&1 # disable this if you with to start new session without any kube-context
 
 # DISABLE_AUTO_TITLE=true
 
