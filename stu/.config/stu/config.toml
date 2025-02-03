@@ -1,0 +1,5 @@
+download_dir = "/tmp/stu_downloads"
+[preview]
+highlight = true
+highlight_theme = "base16-mocha.dark"
+image = true
