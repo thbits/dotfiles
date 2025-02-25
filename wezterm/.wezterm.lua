@@ -9,7 +9,7 @@ local config = wezterm.config_builder and wezterm.config_builder() or {}
 -- General Settings
 -- =======================
 config.color_scheme = 'Catppuccin Mocha'           -- Color scheme
-config.font_size = 9                               -- Font size
+config.font_size = 9.1                               -- Font size
 config.freetype_load_target = "HorizontalLcd"      -- Font rendering optimization
 config.hide_tab_bar_if_only_one_tab = true         -- Hide tab bar if only one tab
 config.disable_default_key_bindings = true         -- Disable default key bindings
@@ -20,7 +20,7 @@ config.hide_mouse_cursor_when_typing = false
 config.freetype_load_target = "Light"
 config.freetype_load_flags = "NO_HINTING"
 config.window_background_opacity = 1
-
+config.line_height = 0.9
 -- =======================
 -- Animation and Rendering
 -- =======================
