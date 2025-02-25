@@ -3,10 +3,10 @@
     "bins": {
         "/usr/local/bin/bin": {
             "path": "/usr/local/bin/bin",
-            "remote_name": "bin_0.19.1_linux_amd64",
-            "version": "v0.19.1",
-            "hash": "1207be420c4fb9e24de5604314d6b4b89834a843aed0f6651ac4659820bc7f17",
-            "url": "https://github.com/marcosnils/bin/releases/tag/v0.19.1",
+            "remote_name": "bin_0.20.0_linux_amd64",
+            "version": "v0.20.0",
+            "hash": "cef1e7e7b97e2ef768cfe6dbebee18db27f27bb9ed668ca0876b4dffd3df5f52",
+            "url": "https://github.com/marcosnils/bin/releases/tag/v0.20.0",
             "provider": "",
             "package_path": "",
             "pinned": false
@@ -44,9 +44,9 @@
         "/usr/local/bin/fzf": {
             "path": "/usr/local/bin/fzf",
             "remote_name": "fzf",
-            "version": "v0.58.0",
-            "hash": "6710f1ceb70a497180a62f5fa5ae2a984e54f1d06e5d37ddffecd1bfcb4d13e5",
-            "url": "https://github.com/junegunn/fzf/releases/tag/v0.58.0",
+            "version": "v0.59.0",
+            "hash": "f3023c2db2104f26d527c5c8d794f0ee15d2244aa01b0de73103389e9f921857",
+            "url": "https://github.com/junegunn/fzf/releases/tag/v0.59.0",
             "provider": "",
             "package_path": "fzf",
             "pinned": false
@@ -54,10 +54,10 @@
         "/usr/local/bin/hugo": {
             "path": "/usr/local/bin/hugo",
             "remote_name": "hugo",
-            "version": "v0.142.0",
-            "hash": "beb7ca27925f1cb025cfb19b3264a364db8d38276d6b39d847908905ae78a41f",
-            "url": "github.com/gohugoio/hugo",
-            "provider": "github",
+            "version": "v0.143.1",
+            "hash": "fc8be77847255ed3ab024c9d4c52c72f2de62743cf3915ba8ddcdc4e92ae1b25",
+            "url": "https://github.com/gohugoio/hugo/releases/tag/v0.143.1",
+            "provider": "",
             "package_path": "hugo",
             "pinned": false
         },
@@ -134,9 +134,9 @@
         "/usr/local/bin/yazi": {
             "path": "/usr/local/bin/yazi",
             "remote_name": "yazi",
-            "version": "v0.4.2",
-            "hash": "73a3f2f35d00e7600065b3f3763b9060f473ba57554acc887f8cc1106ace94d2",
-            "url": "https://github.com/sxyazi/yazi/releases/tag/v0.4.2",
+            "version": "v25.2.11",
+            "hash": "99d91e8b3af0d9cffdf9fc5aa2af08084c1cb53cd8f4eae2f7f33aa053847723",
+            "url": "https://github.com/sxyazi/yazi/releases/tag/v25.2.11",
             "provider": "",
             "package_path": "yazi-x86_64-unknown-linux-gnu/yazi",
             "pinned": false
@@ -144,9 +144,9 @@
         "/usr/local/bin/zoxide": {
             "path": "/usr/local/bin/zoxide",
             "remote_name": "zoxide",
-            "version": "v0.9.6",
-            "hash": "b652df2979a260f1d8abfd0d956ed0a4c7f67827c9ddc07415e862afba0c71b4",
-            "url": "https://github.com/ajeetdsouza/zoxide/releases/tag/v0.9.6",
+            "version": "v0.9.7",
+            "hash": "cb6835d6e90db4d68a4fae945b41b6732e6628888a225d7538a006151e54844a",
+            "url": "https://github.com/ajeetdsouza/zoxide/releases/tag/v0.9.7",
             "provider": "",
             "package_path": "zoxide",
             "pinned": false
