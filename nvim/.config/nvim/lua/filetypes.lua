@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     -- Set environment variables with password in plain text
     vim.env.JENKINS_USER_ID = "admin"
     vim.env.JENKINS_URL = "http://localhost:8081"
-    vim.env.JENKINS_PASSWORD = "8b9c0abcd57d4215904db4a507843f6f"
+    vim.env.JENKINS_PASSWORD = "c664edd5a79b4ad184d9fa2645e8202c"
     require("jenkinsfile_linter").validate()
   end,
 })
@@ -32,6 +32,18 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.jenkinsfile" },
   callback = function()
     require("jenkinsfile_linter").validate()
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "helm", -- fires whenever ft becomes `helm`
+  callback = function(args)
+    -- Use the new API: returns only clients attached to this buffer
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf })) do
+      if client.name == "yamlls" then
+        client.stop() -- cleanly detach yamlls from this buffer
+      end
+    end
   end,
 })
 

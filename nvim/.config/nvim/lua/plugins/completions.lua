@@ -6,14 +6,17 @@ return {
     "xzbdmw/colorful-menu.nvim",
   },
   -- use a release tag to download pre-built binaries
+
   version = "*",
   opts = {
     keymap = {
       preset = "default",
-      ["<C-s"] = {
+      ['C-l'] = {
         function(cmp)
-          cmp.show({ providers = { "snippets" } })
-        end,
+          vim.schedule(function()
+            cmp.show({ providers = { 'snippets' } })
+          end)
+        end
       },
     },
     appearance = {

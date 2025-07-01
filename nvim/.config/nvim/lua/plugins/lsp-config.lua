@@ -14,50 +14,21 @@ return {
         ensure_installed = {
           "lua_ls",
           "helm_ls",
-          "groovyls",
-          "ansiblels",
-          "jinja_lsp",
-          "jqls",
-          "grammarly",
+          -- "docker",
+          -- "ansiblels",
+          -- "jinja_lsp",
+          -- "jqls",
+          -- "grammarly",
           "nginx_language_server",
           "vacuum",
-          "pyright",
+          -- "pyright",
           "terraformls",
-          "eslint",
+          -- "eslint",
           -- "spectral",
         },
       })
     end,
   },
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   lazy = false,
-  --   config = function()
-  --     local capabilities = require('blink.cmp').get_lsp_capabilities()
-  --     local lspconfig = require("lspconfig")
-  --     lspconfig.lua_ls.setup({ capabilities = capabilities })
-  --     lspconfig.helm_ls.setup({ capabilities = capabilities })
-  --     lspconfig.groovyls.setup({
-  --       cmd = { "groovy-language-server" },
-  --     })
-  --     lspconfig.spectral.setup({ capabilities = capabilities })
-  --     lspconfig.ansiblels.setup({ capabilities = capabilities })
-  --     lspconfig.jinja_lsp.setup({ capabilities = capabilities })
-  --     lspconfig.jqls.setup({ capabilities = capabilities })
-  --     lspconfig.grammarly.setup({ capabilities = capabilities })
-  --     lspconfig.nginx_language_server.setup({ capabilities = capabilities })
-  --     lspconfig.vacuum.setup({ capabilities = capabilities })
-  --     lspconfig.pyright.setup({ capabilities = capabilities })
-  --     lspconfig.terraformls.setup({ capabilities = capabilities })
-  --     lspconfig.eslint.setup({ capabilities = capabilities })
-  --     lspconfig.spectral.setup({ capabilities = capabilities })
-  --     vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-  --     vim.keymap.set("n", "<leader>ge", vim.lsp.buf.definition, {})
-  --     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-  --     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-  --     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-  --   end,
-  -- },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
