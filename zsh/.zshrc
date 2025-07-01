@@ -74,8 +74,7 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git kubectl compleat zsh-autosuggestions helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search fzf-tab wsl-notify-zsh)
-plugins=(git kubectl compleat zsh-autosuggestions helm docker cp timer zsh-syntax-highlighting zsh-fzf-history-search fzf-tab ohmyzsh-full-autoupdate)
+plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -124,9 +123,7 @@ complete -C $(which aws_completer) aws
 
 ### Aliases ###
 alias aws='aws --no-cli-pager'
-alias kx='kubectx'
-alias cs='/home/thalo/automate_input.expect'
-alias bin='sudo bin'
+alias cs='${HOME}/automate_input.expect'
 
 # Use kubecolor if exists else use kubectl
 command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
@@ -146,8 +143,6 @@ alias cg='function _cg(){ wslview "https://chatgpt.com/?q=$*"; };_cg'
 
 alias vcfg='nvim ~/.config/nvim'
 
-notify-send() { wsl-notify-send.exe --category $WSL_DISTRO_NAME "${@}"; }
-
 #set nvim as default editor
 alias vi='nvim'
 export EDITOR="nvim"
@@ -158,13 +153,6 @@ export KUBE_EDITOR="nvim"
 mkd() {
   mkdir -p "$@" && cd "$@"
 } 
-
-function tmux_last_session(){
-    LAST_TMUX_SESSION=$(tmux list-sessions | awk -F ":" '{print$1}' | tail -n1);
-    tmux attach -t $LAST_TMUX_SESSION
-    if [[ $? -eq 1 ]] && tmux new-session -s default
-}
-bindkey -s '^s' 'tmux_last_session ^M'
 
 # Function to open files with Neovim or navigate directories using fzf with bat preview
 v() {
@@ -211,18 +199,21 @@ v() {
 
 ### Override config files path that are not in ~/.config ###
 export STU_ROOT_DIR="${HOME}/.config/stu"
+export K9S_CONFIG_DIR="${HOME}/.config/k9s"
 
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# export KUBECONFIG=~/.kube/config:~/.kube/aws
 export KUBECONFIG=~/.kube/config
 
 # Kubeswitch
 source <(switcher init zsh)
 alias s='switch > /dev/null 2> >(grep -vE "WARN|warning")'
-source <(switch completion zsh)
-switch . > /dev/null 2>&1 # disable this if you with to start new session without any kube-context
+# source <(switch completion zsh)
+# switch . > /dev/null 2>&1 # disable this if you with to start new session without any kube-context
+
+# zsh-syntax-highlighting
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # DISABLE_AUTO_TITLE=true
 
