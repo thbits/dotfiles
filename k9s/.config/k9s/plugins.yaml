@@ -42,35 +42,6 @@ plugins:
     - -c
     - "helm get values $COL-NAME -n $NAMESPACE --kube-context $CONTEXT | less"
 
-      #  stern:
-      #    shortCut: Ctrl-L
-      #    confirm: false
-      #    description: "Logs <Stern>"
-      #    scopes:
-      #      - pods
-      #    command: stern
-      #    background: false
-      #    args:
-      #      - --tail
-      #      - 50
-      #      - $FILTER
-      #      - -n
-      #      - $NAMESPACE
-      #      - --context
-      #      - $CONTEXT
-      #
-      #  stern-container:
-      #    shortCut: Ctrl-L
-      #    confirm: false
-      #    description: "Logs <Stern>"
-      #    scopes:
-      #      - containers
-      #    command: bash
-      #    background: false
-      #    args:
-      #      - -c
-      #      - "stern $POD -c ^$COL-NAME$ -n $NAMESPACE --context $CONTEXT --tail 50 | less -K"
-
   log-less:
     shortCut: Shift-L
     description: "logs | less"
