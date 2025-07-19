@@ -1,4 +1,3 @@
-#16384,zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin:
@@ -74,7 +73,10 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils)
+plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils zsh-vi-mode)
+
+# Load before plugin to fix fzf search history when in insert mode
+ZVM_INIT_MODE=sourcing
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,7 +125,7 @@ complete -C $(which aws_completer) aws
 
 ### Aliases ###
 alias aws='aws --no-cli-pager'
-alias cs='${HOME}/automate_input.expect'
+alias cs="${HOME}/automate_input.expect"
 
 # Use kubecolor if exists else use kubectl
 command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
@@ -147,6 +149,9 @@ alias vcfg='nvim ~/.config/nvim'
 alias vi='nvim'
 export EDITOR="nvim"
 export KUBE_EDITOR="nvim"
+
+# Lazygit alias
+alias lg='lazygit'
 
 ### Useful functions ###
 
@@ -226,5 +231,3 @@ eval "$(fzf --zsh)"
 
 #start zeoxide
 eval "$(zoxide init zsh)"
-
-#zprof
