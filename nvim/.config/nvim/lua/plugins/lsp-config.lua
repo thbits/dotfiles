@@ -45,7 +45,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
-      lspconfig.lua_ls.setup({ capabilites = capabilities })
+      lspconfig.lua_ls.setup({ capabilities = capabilities })
       lspconfig.helm_ls.setup({ capabilities = capabilities })
       lspconfig.groovyls.setup({
         cmd = { "groovy-language-server" },
@@ -60,7 +60,7 @@ return {
       lspconfig.pyright.setup({ capabilities = capabilities })
       lspconfig.terraformls.setup({ capabilities = capabilities })
       lspconfig.eslint.setup({ capabilities = capabilities })
-      -- lspconfig.yamlls.setup({ capabilities = capabilities })
+      lspconfig.yamlls.setup({ capabilities = capabilities })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>ge", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})

@@ -2,16 +2,18 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    branch = "main",
-    setup = function()
-      local config = require("nvim-treesitter.configs")
-      config.setup({
+    config = function()
+      require("nvim-treesitter.configs").setup({
         auto_install = true,
-        --      ensure_installed = { "lua"},
-        highlight = { enabled = true },
-        indent = { enabled = true },
+        -- ensure_installed = { "lua" },
+        highlight = { enable = true },
+        indent = { enable = true },
       })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
