@@ -120,3 +120,19 @@ plugins:
     args:
       - -c
       - "kubectl node-shell $NAME --context $CONTEXT"
+
+  # modify-secret:
+  #   shortCut: Ctrl-X
+  #   description: "Modify decoded secret"
+  #   scopes:
+  #     - secrets
+  #   background: false
+  #   command: bash
+  #   args:
+  #     - -c
+  #     - kubectl
+  #     - modify-secret
+  #     - $NAME
+  #     - --namespace
+  #     - $NAMESPACE
+  #

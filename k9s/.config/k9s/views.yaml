@@ -1,0 +1,26 @@
+views:
+  v1/pods:
+    sortColumn: NAME:asc
+    columns:
+    - NAMESPACE
+    - NAME
+    - PF
+    - READY
+    - STATUS
+    - RESTARTS
+    - IMG-VER:.spec.containers[0].image|split(":")|.[-1]|L
+    # - CPU
+    # - '%CPU/R'
+    # - '%CPU/L'
+    # - MEM
+    # - '%MEM/R'
+    # - '%MEM/L'
+    # - IP
+    # - NODE
+    # - AGE
+  v1/nodes:
+    sortColumn: NODETYPE:asc
+    columns:
+      - NAME
+      - NODETYPE:.metadata.labels.nodeType
+      - INSTANCETYPE:metadata.labels.beta\.kubernetes\.io\/instance-type

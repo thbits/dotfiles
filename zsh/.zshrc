@@ -5,6 +5,7 @@ export PATH=$PATH:~/go/bin
 export PATH=$PATH:/.local/bin
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -28,8 +29,8 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
- zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+ # zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
@@ -73,10 +74,10 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils zsh-vi-mode)
+plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils)
 
-# Load before plugin to fix fzf search history when in insert mode
-ZVM_INIT_MODE=sourcing
+# Load before plugin to fix fzf search history when in insert mode when using zsh-vi-mode
+# ZVM_INIT_MODE=sourcing
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,6 +118,15 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt extended_history
+setopt hist_no_store
+
+# Don't log commands with specific strings
+function zshaddhistory() {
+  local cmd=${1%%$'\n'}
+  [[ $cmd == *"TMUX_MCP_START"* ]] && return 1
+  return 0
+}
 
 autoload -Uz compinit && compinit
 source <(kubectl completion zsh)
@@ -209,7 +219,7 @@ export K9S_CONFIG_DIR="${HOME}/.config/k9s"
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-export KUBECONFIG=~/.kube/config
+# export KUBECONFIG=~/.kube/config
 
 # Kubeswitch
 source <(switcher init zsh)
