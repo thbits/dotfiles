@@ -120,6 +120,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt extended_history
 setopt hist_no_store
+setopt correct
 
 # Don't log commands with specific strings
 function zshaddhistory() {
@@ -162,6 +163,9 @@ export KUBE_EDITOR="nvim"
 
 # Lazygit alias
 alias lg='lazygit'
+
+# Copy my IP to clipboard
+alias cip='ip=$(curl -s ifconfig.me); echo "$ip/32" | pbcopy; echo "IP $ip/32 copied to clipboard"'
 
 ### Useful functions ###
 
