@@ -21,7 +21,7 @@ return {
           -- "grammarly",
           "nginx_language_server",
           "vacuum",
-          -- "pyright",
+          "pyright",
           "terraformls",
           -- "eslint",
           -- "spectral",
@@ -57,7 +57,37 @@ return {
       lspconfig.grammarly.setup({ capabilities = capabilities })
       lspconfig.nginx_language_server.setup({ capabilities = capabilities })
       lspconfig.vacuum.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({ capabilities = capabilities })
+      lspconfig.pyright.setup({
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = true,
+              typeCheckingMode = "basic",
+            },
+          },
+        },
+        -- Automatically detect and use virtual environment
+        on_init = function(client)
+          local path = vim.fn.getcwd()
+          -- Check for common virtual environment locations
+          local venv_paths = {
+            path .. "/.venv",
+            path .. "/venv",
+            path .. "/.virtualenv",
+            path .. "/env",
+          }
+          for _, venv_path in ipairs(venv_paths) do
+            if vim.fn.isdirectory(venv_path) == 1 then
+              client.config.settings.python.pythonPath = venv_path .. "/bin/python"
+              client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+              break
+            end
+          end
+        end,
+      })
       lspconfig.terraformls.setup({ capabilities = capabilities })
       lspconfig.eslint.setup({ capabilities = capabilities })
       lspconfig.yamlls.setup({ capabilities = capabilities })
