@@ -175,3 +175,8 @@ disabled = true
 [terraform]
 style = "bg:#4C566A"
 format = '[💨 $workspace ]($style)'
+
+# [python]
+# symbol = "🐍"
+# format = '[ $symbol ($version) ]($style)'
+# pyenv_version_name = true
