@@ -6,6 +6,7 @@ export PATH=$PATH:/.local/bin
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.config/opencode/bin:$PATH"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -219,6 +220,7 @@ v() {
 ### Override config files path that are not in ~/.config ###
 export STU_ROOT_DIR="${HOME}/.config/stu"
 export K9S_CONFIG_DIR="${HOME}/.config/k9s"
+export OPENCODE_CONFIG_DIR="${HOME}/.config/opencode"
 
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
