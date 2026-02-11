@@ -10,22 +10,36 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     config = function()
+      local ensure_installed = {
+        "lua_ls",
+        "helm_ls",
+        "dockerls",
+        "docker_compose_language_service",
+        "ansiblels",
+        -- "jinja_lsp", -- Not available in Mason
+        -- "jqls", -- Not available in Mason
+        "ltex", -- LanguageTool LSP for grammar/spell checking (replaces archived grammarly)
+        "vacuum",
+        "pyright",
+        "terraformls",
+        "eslint",
+        "bashls",
+        "jsonls",
+        "marksman",
+        "taplo",
+        -- "spectral",
+      }
+
+      local has_supported_nginx_python = vim.fn.executable("python3.12") == 1
+        or vim.fn.executable("python3.11") == 1
+        or vim.fn.executable("python3.10") == 1
+        or vim.fn.executable("python3.9") == 1
+      if has_supported_nginx_python then
+        table.insert(ensure_installed, "nginx_language_server")
+      end
+
       require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "helm_ls",
-          -- "docker",
-          -- "ansiblels",
-          -- "jinja_lsp",
-          -- "jqls",
-          -- "grammarly",
-          "nginx_language_server",
-          "vacuum",
-          "pyright",
-          "terraformls",
-          -- "eslint",
-          -- "spectral",
-        },
+        ensure_installed = ensure_installed,
       })
     end,
   },
@@ -52,10 +66,19 @@ return {
       })
       -- lspconfig.spectral.setup({ capabilities = capabilities })
       lspconfig.ansiblels.setup({ capabilities = capabilities })
-      lspconfig.jinja_lsp.setup({ capabilities = capabilities })
-      lspconfig.jqls.setup({ capabilities = capabilities })
-      lspconfig.grammarly.setup({ capabilities = capabilities })
-      lspconfig.nginx_language_server.setup({ capabilities = capabilities })
+      -- lspconfig.jinja_lsp.setup({ capabilities = capabilities }) -- Not available in Mason
+      -- lspconfig.jqls.setup({ capabilities = capabilities }) -- Not available in Mason
+      lspconfig.ltex.setup({
+        capabilities = capabilities,
+        settings = {
+          ltex = {
+            language = "en-US",
+          },
+        },
+      })
+      if vim.fn.executable("nginx-language-server") == 1 then
+        lspconfig.nginx_language_server.setup({ capabilities = capabilities })
+      end
       lspconfig.vacuum.setup({ capabilities = capabilities })
       lspconfig.pyright.setup({
         capabilities = capabilities,
@@ -91,6 +114,12 @@ return {
       lspconfig.terraformls.setup({ capabilities = capabilities })
       lspconfig.eslint.setup({ capabilities = capabilities })
       lspconfig.yamlls.setup({ capabilities = capabilities })
+      lspconfig.dockerls.setup({ capabilities = capabilities })
+      lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
+      lspconfig.bashls.setup({ capabilities = capabilities })
+      lspconfig.jsonls.setup({ capabilities = capabilities })
+      lspconfig.marksman.setup({ capabilities = capabilities })
+      lspconfig.taplo.setup({ capabilities = capabilities })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>ge", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
