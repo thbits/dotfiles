@@ -16,9 +16,7 @@ return {
         "dockerls",
         "docker_compose_language_service",
         "ansiblels",
-        -- "jinja_lsp", -- Not available in Mason
-        -- "jqls", -- Not available in Mason
-        "ltex", -- LanguageTool LSP for grammar/spell checking (replaces archived grammarly)
+        "ltex",
         "vacuum",
         "pyright",
         "terraformls",
@@ -27,7 +25,6 @@ return {
         "jsonls",
         "marksman",
         "taplo",
-        -- "spectral",
       }
 
       local has_supported_nginx_python = vim.fn.executable("python3.12") == 1
@@ -57,18 +54,36 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
-      lspconfig.lua_ls.setup({ capabilities = capabilities })
-      lspconfig.helm_ls.setup({ capabilities = capabilities })
-      lspconfig.groovyls.setup({
+
+      -- Simple servers with just capabilities
+      local simple_servers = {
+        "lua_ls",
+        "helm_ls",
+        "ansiblels",
+        "vacuum",
+        "terraformls",
+        "eslint",
+        "yamlls",
+        "dockerls",
+        "docker_compose_language_service",
+        "bashls",
+        "jsonls",
+        "marksman",
+        "taplo",
+      }
+
+      for _, server in ipairs(simple_servers) do
+        vim.lsp.config(server, { capabilities = capabilities })
+      end
+
+      -- Servers with custom settings
+      vim.lsp.config("groovyls", {
         cmd = { "groovy-language-server" },
+        capabilities = capabilities,
       })
-      -- lspconfig.spectral.setup({ capabilities = capabilities })
-      lspconfig.ansiblels.setup({ capabilities = capabilities })
-      -- lspconfig.jinja_lsp.setup({ capabilities = capabilities }) -- Not available in Mason
-      -- lspconfig.jqls.setup({ capabilities = capabilities }) -- Not available in Mason
-      lspconfig.ltex.setup({
+
+      vim.lsp.config("ltex", {
         capabilities = capabilities,
         settings = {
           ltex = {
@@ -76,11 +91,8 @@ return {
           },
         },
       })
-      if vim.fn.executable("nginx-language-server") == 1 then
-        lspconfig.nginx_language_server.setup({ capabilities = capabilities })
-      end
-      lspconfig.vacuum.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({
+
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         settings = {
           python = {
@@ -92,10 +104,8 @@ return {
             },
           },
         },
-        -- Automatically detect and use virtual environment
         on_init = function(client)
           local path = vim.fn.getcwd()
-          -- Check for common virtual environment locations
           local venv_paths = {
             path .. "/.venv",
             path .. "/venv",
@@ -111,29 +121,29 @@ return {
           end
         end,
       })
-      lspconfig.terraformls.setup({ capabilities = capabilities })
-      lspconfig.eslint.setup({ capabilities = capabilities })
-      lspconfig.yamlls.setup({ capabilities = capabilities })
-      lspconfig.dockerls.setup({ capabilities = capabilities })
-      lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
-      lspconfig.bashls.setup({ capabilities = capabilities })
-      lspconfig.jsonls.setup({ capabilities = capabilities })
-      lspconfig.marksman.setup({ capabilities = capabilities })
-      lspconfig.taplo.setup({ capabilities = capabilities })
+
+      -- Enable all configured servers
+      local all_servers = vim.list_extend(simple_servers, { "groovyls", "ltex", "pyright" })
+      if vim.fn.executable("nginx-language-server") == 1 then
+        vim.lsp.config("nginx_language_server", { capabilities = capabilities })
+        table.insert(all_servers, "nginx_language_server")
+      end
+      vim.lsp.enable(all_servers)
+
+      -- Keymaps
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>ge", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
+      -- Format lua on save
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local c = vim.lsp.get_client_by_id(args.data.client_id)
           if not c then
             return
           end
-
           if vim.bo.filetype == "lua" then
-            -- Format the current buffer on save
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
               callback = function()

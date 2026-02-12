@@ -1,6 +1,7 @@
+-- Disabled: depends on nvim-treesitter-textobjects which is incompatible with nvim-treesitter rewrite
 return {
   "mawkler/demicolon.nvim",
-  -- keys = { ';', ',', 't', 'f', 'T', 'F', ']', '[', ']d', '[d' }, -- Uncomment this to lazy load
+  enabled = false,
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-textobjects",
