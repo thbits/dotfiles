@@ -25,6 +25,7 @@ return {
         "jsonls",
         "marksman",
         "taplo",
+        "yamlls",
       }
 
       local has_supported_nginx_python = vim.fn.executable("python3.12") == 1
@@ -64,7 +65,6 @@ return {
         "vacuum",
         "terraformls",
         "eslint",
-        "yamlls",
         "dockerls",
         "docker_compose_language_service",
         "bashls",
@@ -78,6 +78,15 @@ return {
       end
 
       -- Servers with custom settings
+      vim.lsp.config("yamlls", {
+        cmd = {
+          "yaml-schema-router",
+          "--lsp-path",
+          vim.fn.stdpath("data") .. "/mason/bin/yaml-language-server",
+        },
+        capabilities = capabilities,
+      })
+
       vim.lsp.config("groovyls", {
         cmd = { "groovy-language-server" },
         capabilities = capabilities,
@@ -123,7 +132,7 @@ return {
       })
 
       -- Enable all configured servers
-      local all_servers = vim.list_extend(simple_servers, { "groovyls", "ltex", "pyright" })
+      local all_servers = vim.list_extend(simple_servers, { "yamlls", "groovyls", "ltex", "pyright" })
       if vim.fn.executable("nginx-language-server") == 1 then
         vim.lsp.config("nginx_language_server", { capabilities = capabilities })
         table.insert(all_servers, "nginx_language_server")

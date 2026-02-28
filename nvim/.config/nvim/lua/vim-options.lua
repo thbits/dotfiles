@@ -32,7 +32,17 @@ vim.o.cmdheight = 0
 
 -- General custom keymaps
 -- vim.api.nvim_set_keymap('n', '<leader>q', ':bd!<CR>', { noremap = true, silent = true }) -- Close current buffer
-vim.api.nvim_set_keymap("n", "<leader>q", ":Bdelete!<CR>", { noremap = true, silent = true }) -- Close current buffer
+vim.keymap.set("n", "<leader>q", function()
+  local bt = vim.bo.buftype
+  local ft = vim.bo.filetype
+  if ft == "neo-tree" or ft == "neo-tree-popup" then
+    vim.cmd("Neotree close")
+  elseif bt == "terminal" then
+    vim.cmd("hide") -- hide window, keep terminal alive
+  else
+    vim.cmd("Bdelete!")
+  end
+end, { noremap = true, silent = true, desc = "Close current buffer" })
 vim.keymap.set("n", "<leader>cp", ':let @+ = expand("%:f")<CR>', {})                          -- Copy file path
 vim.api.nvim_set_keymap(
   "n",
