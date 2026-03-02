@@ -3,10 +3,10 @@
 export PATH=$PATH:/usr/local/go/bin:
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:/.local/bin
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/opencode/bin:$PATH"
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -138,6 +138,7 @@ complete -C $(which aws_completer) aws
 ### Aliases ###
 alias aws='aws --no-cli-pager'
 alias cs="${HOME}/automate_input.expect"
+alias kx='kubectx'
 
 # Use kubecolor if exists else use kubectl
 command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
@@ -168,6 +169,8 @@ alias lg='lazygit'
 # Copy my IP to clipboard
 alias cip='ip=$(curl -s ifconfig.me); echo "$ip/32" | pbcopy; echo "IP $ip/32 copied to clipboard"'
 
+alias claude='claude --mcp-config ${HOME}/.config/mcp.json'
+
 ### Useful functions ###
 
 mkd() {
@@ -194,8 +197,8 @@ v() {
 
     # Use fd to list both files and directories, then pipe to fzf
     local selection
-    selection=$(fd --type f --type d --hidden --follow --exclude .git | fzf \
-      --preview 'if [[ -f {} ]]; then bat --theme="Catppuccin Mocha" --style=numbers --color=always {}; else echo "📁 Directory: {}"; fi' \
+    selection=$(fd --type f --type d --hidden --exclude .git --exclude Library --exclude .cache --exclude .npm | \
+      fzf --preview 'if [[ -f {} ]]; then bat --theme="Catppuccin Mocha" --style=numbers --color=always {}; else echo "📁 Directory: {}"; fi' \
       --preview-window=right:60% \
       --layout=reverse \
       --height=80% \
@@ -225,11 +228,14 @@ export OPENCODE_CONFIG_DIR="${HOME}/.config/opencode"
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# opencode
+export PATH=/Users/tomhalo/.opencode/bin:$PATH
+
 # export KUBECONFIG=~/.kube/config
 
 # Kubeswitch
-source <(switcher init zsh)
-alias s='switch > /dev/null 2> >(grep -vE "WARN|warning")'
+# source <(switcher init zsh)
+# alias s='switch > /dev/null 2> >(grep -vE "WARN|warning")'
 # source <(switch completion zsh)
 # switch . > /dev/null 2>&1 # disable this if you with to start new session without any kube-context
 
