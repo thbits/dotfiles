@@ -25,3 +25,9 @@ views:
       # - NODETYPE:.metadata.labels.nodeType
       - INSTANCETYPE:metadata.labels.beta\.kubernetes\.io\/instance-type
       - NODEPOOL:metadata.labels.karpenter\.sh\/nodepool
+  networking.k8s.io/v1/ingresses:
+    columns:
+      - NAMESPACE
+      - NAME
+      - CLASS
+      - SCHEME:metadata.annotations.alb\.ingress\.kubernetes\.io\/scheme
