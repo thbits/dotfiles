@@ -1,0 +1,13 @@
+customCommands:
+  - key: "C"
+    context: "files"
+    description: "AI commit"
+    prompts:
+      - type: "menuFromCommand"
+        title: "Pick a commit message"
+        key: "Subject"
+        command: 'sh -c "$HOME/.config/lazygit/ai_commit.sh"'
+        filter: "^(.+)$"
+        valueFormat: "{{ .group_1 }}"
+        labelFormat: "{{ .group_1 }}"
+    command: "git commit -m {{.Form.Subject | quote}}"

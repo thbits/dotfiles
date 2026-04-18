@@ -1,3 +1,4 @@
 k9s/.config/k9s/clusters/
 k9s/.config/k9s/screen-dumps/
 tmux/.config/tmux/plugins/
+grafanactl/.config/grafanactl/config.yaml

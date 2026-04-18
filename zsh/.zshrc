@@ -5,6 +5,9 @@ export PATH=$PATH:~/go/bin
 export PATH=$PATH:/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/opencode/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+# Source secrets
+[[ -f "$HOME/.env" ]] && source "$HOME/.env"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -114,14 +117,16 @@ bindkey  "^[[3~"  delete-char
 
 #unsetopt share_history
 HISTDUP=erase
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-setopt extended_history
-setopt hist_no_store
-setopt correct
+setopt hist_ignore_space       # commands starting with space won't be saved
+setopt hist_ignore_all_dups    # remove older duplicate when new one is added
+setopt hist_save_no_dups       # don't write duplicates to history file
+setopt hist_ignore_dups        # don't record consecutive duplicate commands
+setopt hist_find_no_dups       # skip duplicates when searching history
+setopt extended_history        # save timestamp and duration per command
+setopt hist_no_store           # don't store the `history` command itself
+setopt correct                 # suggest correction for mistyped commands
+setopt no_beep                 # silence terminal bell
+setopt autocd                  # type a dir name to cd into it
 
 # Don't log commands with specific strings
 function zshaddhistory() {
@@ -169,7 +174,12 @@ alias lg='lazygit'
 # Copy my IP to clipboard
 alias cip='ip=$(curl -s ifconfig.me); echo "$ip/32" | pbcopy; echo "IP $ip/32 copied to clipboard"'
 
-alias claude='claude --mcp-config ${HOME}/.config/mcp.json'
+unset cc
+alias cc='claude --mcp-config ${HOME}/.config/mcp.json'
+
+unalias ll
+alias ll='eza -l --icons --git'
+alias lt='eza -l --icons --git --sort=modified --reverse'
 
 ### Useful functions ###
 
@@ -220,7 +230,17 @@ v() {
   fi
 }
 
+@() {
+  local request="$*"
+  local system_prompt=$(cat ~/.at_prompt)
+  printf "⏳ thinking... "
+  local cmd=$(claude -p --model haiku "$system_prompt <request>$request<end>" | head -1)
+  printf "\r\033[K"  # clear the thinking line
+  print -z "$cmd"
+}
+
 ### Override config files path that are not in ~/.config ###
+export XDG_CONFIG_HOME="${HOME}/.config"
 export STU_ROOT_DIR="${HOME}/.config/stu"
 export K9S_CONFIG_DIR="${HOME}/.config/k9s"
 export OPENCODE_CONFIG_DIR="${HOME}/.config/opencode"
