@@ -153,13 +153,8 @@ compdef kubecolor=kubectl
 # bat as cat
 command -v bat >/dev/null 2>&1 && alias cat="bat --style=plain --paging=never"
 
-#clisso loglevel to error
-alias clisso='clisso --log-level error'
-
 #eks-node-viewer with current context for multiple region/profiles
 alias eksnv='env $(kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.env[] | select(.name == \"AWS_PROFILE\") | \"AWS_PROFILE=\" + .value" && kubectl config view --context $CONTEXT --minify -o json | jq -r ".users[0].user.exec.args | \"AWS_REGION=\" + .[1]") eks-node-viewer --context $CONTEXT --resources cpu,memory --extra-labels karpenter.sh/nodepool,eks-node-viewer/node-age --node-sort=creation=dsc'
-
-alias cg='function _cg(){ wslview "https://chatgpt.com/?q=$*"; };_cg'
 
 alias vcfg='nvim ~/.config/nvim'
 

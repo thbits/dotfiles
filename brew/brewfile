@@ -5,6 +5,7 @@ tap "aws/tap"
 tap "AKSarav/kubenodeusage"
 tap "marcus/tap"
 tap "hamed-elfayome/claude-usage"
+tap "thbits/tap"
 
 # CLI
 brew "git"
@@ -47,6 +48,13 @@ brew "node"
 brew "pgcli"
 brew "jira-cli"
 brew "ruff"
+brew "thbits/tap/naviclaude"
+brew "robusta-dev/homebrew-krr/krr"
+brew "grafanactl"
+brew "eza"
+brew "go"
+brew "libsodium" # For keepassXC browser integration
+brew "wireguard-tools"
 
 # Linuxify
 brew "watch"
@@ -96,3 +104,5 @@ cask "cursor"
 cask "input-source-pro"
 cask "rectangle"
 cask "claude-usage-tracker"
+cask "dockdoor"
+cask "typewhisper/tap/typewhisper"

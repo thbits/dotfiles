@@ -1,6 +1,6 @@
 font-family = CaskaydiaMono Nerd Font Mono
 theme = catppuccin-mocha.conf
-font-size = 12
+font-size = 13
 # background-opacity = 0.8
 # background-blur = true
 macos-option-as-alt = true
