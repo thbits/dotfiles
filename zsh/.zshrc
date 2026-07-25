@@ -268,3 +268,7 @@ eval "$(fzf --zsh)"
 
 #start zeoxide
 eval "$(zoxide init zsh)"
+
+# Hindsight memory (local Ollama LLM + local embeddings, Docker Postgres) daemon config
+[[ -f "$HOME/hindsight/hindsight.env" ]] && source "$HOME/hindsight/hindsight.env"
+
