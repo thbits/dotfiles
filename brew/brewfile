@@ -55,6 +55,7 @@ brew "eza"
 brew "go"
 brew "libsodium" # For keepassXC browser integration
 brew "wireguard-tools"
+brew "ollama" # Local LLM runtime (Hindsight memory extraction, Metal GPU)
 
 # Linuxify
 brew "watch"
@@ -85,6 +86,7 @@ brew "file-formula"
 brew "openssh"
 brew "rsync"
 brew "unzip"
+brew "netcat"
 
 # Cask
 cask "firefox"
