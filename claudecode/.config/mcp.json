@@ -6,7 +6,7 @@
         "awslabs.aws-api-mcp-server@latest"
       ],
       "env": {
-        "AWS_REGION": "us-east-1"
+        "AWS_REGION": "${AWS_REGION:-us-east-1}"
       },
       "disabled": false,
       "autoApprove": []
@@ -17,15 +17,15 @@
     },
     "obsidian": {
       "command": "npx",
-      "args": ["@mauricio.wolff/mcp-obsidian@latest", "/Users/tomhalo/personal/obsidian/BrainOps"],
+      "args": ["@mauricio.wolff/mcp-obsidian@latest", "${OBSIDIAN_VAULT}"],
       "env": {}
     },
     "mcp-atlassian": {
       "command": "uvx",
       "args": ["mcp-atlassian"],
       "env": {
-        "JIRA_URL": "https://opmed-ai.atlassian.net",
-        "JIRA_USERNAME": "tom@opmed.ai"
+        "JIRA_URL": "${JIRA_URL}",
+        "JIRA_USERNAME": "${JIRA_USERNAME}"
       }
     }
   }

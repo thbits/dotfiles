@@ -12,6 +12,7 @@ This repository provides a generic method to backup your files using GNU Stow. S
   - [Step 4: Unstow Your Files](#step-4-unstow-your-files)
   - [Step 5: Restore Your Files](#step-5-restore-your-files)
 - [Example](#example)
+- [Claude Code (`claudecode` package)](#claude-code-claudecode-package)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -122,4 +123,90 @@ cd ~/your-repo
 stow -t ~ configs
 stow -t ~ documents
 stow -t ~ photos
+```
+
+## Claude Code (`claudecode` package)
+
+Portable [Claude Code](https://code.claude.com) configuration. Only genuinely
+machine-independent files live here — no absolute paths, no credentials, no
+work-specific content.
+
+```
+claudecode/
+├── .claude/
+│   ├── settings.json      model, theme, hooks, enabled plugins, effort level
+│   ├── CLAUDE.md          global instructions
+│   ├── hooks/             caffeinate-*.sh — keep the Mac awake while Claude works
+│   ├── themes/            catppuccin-mocha
+│   └── agents/            generic subagent definitions
+└── .config/mcp.json       MCP servers, consumed by the `cc` alias in zsh/.zshrc
+```
+
+### Restoring on a new machine
+
+**Always stow this package with `--no-folding`:**
+
+```bash
+brew install stow
+cd ~/personal/git/dotfiles
+stow --no-folding -t ~ claudecode
+```
+
+`--no-folding` forces one symlink *per file* instead of symlinking whole
+directories. It matters because Claude Code writes ~750&nbsp;MB of runtime state
+into `~/.claude` (`projects/`, `plugins/`, `history.jsonl`, `sessions/`). Without
+the flag, a fresh machine where `~/.claude` does not yet exist gets
+`~/.claude -> dotfiles/claudecode/.claude`, and all of that state lands **inside
+this repository**. A deny-by-default whitelist in `.gitignore` blocks it from
+ever being committed, but the flag is what stops it happening at all.
+
+If stow refuses because a real file already exists at the target, let stow
+resolve it and then restore the repo's version:
+
+```bash
+stow --no-folding --adopt -t ~ claudecode   # moves existing files into the repo
+git checkout -- claudecode/                  # discard them, keep the repo version
+```
+
+### Required environment variables
+
+`.config/mcp.json` uses `${VAR}` expansion, so the private values stay out of
+this public repo. Put them in `~/.env`, which `zsh/.zshrc` already sources:
+
+```bash
+export OBSIDIAN_VAULT="$HOME/path/to/vault"      # obsidian MCP server
+export JIRA_URL="https://your-org.atlassian.net" # mcp-atlassian
+export JIRA_USERNAME="you@example.com"           # mcp-atlassian
+export JIRA_API_TOKEN="..."                      # mcp-atlassian
+export AWS_REGION="us-east-1"                    # optional, defaults to us-east-1
+```
+
+Then launch with the alias from `zsh/.zshrc`:
+
+```bash
+cc    # claude --mcp-config ${HOME}/.config/mcp.json
+```
+
+Skills and plugins restore themselves: the `SessionStart` hook in
+`settings.json` runs `npx -y skills update`, and `enabledPlugins` /
+`extraKnownMarketplaces` cause plugins to reinstall on first launch.
+
+### Deliberately not tracked
+
+| Path | Why |
+|---|---|
+| `~/.claude/settings.local.json` | Per-machine permission grants and remote environment ID |
+| `~/.claude.json` | `machineID`, `oauthAccount`, `userID`, per-project history |
+| `~/.claude/plugins/` | Large cache; rebuilt from `enabledPlugins` |
+| `~/.claude/skills/` | Managed by `npx -y skills update` |
+| `~/.env` | Secrets and machine-specific paths |
+
+Work-specific agents and skills are intentionally left out of this repo and stay
+local to `~/.claude/` on each machine.
+
+### Unstowing
+
+```bash
+cd ~/personal/git/dotfiles
+stow -D -t ~ claudecode
 ```

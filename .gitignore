@@ -2,3 +2,23 @@ k9s/.config/k9s/clusters/
 k9s/.config/k9s/screen-dumps/
 tmux/.config/tmux/plugins/
 grafanactl/.config/grafanactl/config.yaml
+
+# claudecode: deny-by-default whitelist.
+# Claude Code writes ~750M of runtime state into ~/.claude (projects/, plugins/,
+# history.jsonl, sessions/). If the package is ever stowed WITH folding, that
+# state lands inside this repo. Only the files listed below can be committed.
+claudecode/.claude/**
+!claudecode/.claude/
+!claudecode/.claude/settings.json
+!claudecode/.claude/CLAUDE.md
+!claudecode/.claude/hooks/
+!claudecode/.claude/hooks/*.sh
+!claudecode/.claude/themes/
+!claudecode/.claude/themes/*.json
+!claudecode/.claude/agents/
+!claudecode/.claude/agents/*.md
+
+# Machine-specific / secret-bearing, never tracked:
+#   ~/.claude/settings.local.json  (remote env id, absolute-path grants)
+#   ~/.claude.json                 (machineID, oauthAccount, userID)
+#   ~/.env                         (OBSIDIAN_VAULT, JIRA_*, API tokens)
