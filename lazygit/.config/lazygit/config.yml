@@ -1,3 +1,17 @@
+gui:
+  # Checking out a branch already checked out elsewhere jumps to its worktree silently
+  skipSwitchWorktreeOnCheckoutWarning: true
+  sidePanels:
+    - [status]
+    - [files, submodules]
+    - [worktrees]
+    - [branches, remotes, tags]
+    - [commits, reflog]
+    - [stash]
+
+worktree:
+  defaultPath: ../worktrees
+
 customCommands:
   - key: "C"
     context: "files"
