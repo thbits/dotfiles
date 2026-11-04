@@ -78,12 +78,13 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils)
+plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils herdr)
 
 # Load before plugin to fix fzf search history when in insert mode when using zsh-vi-mode
 # ZVM_INIT_MODE=sourcing
 
 source $ZSH/oh-my-zsh.sh
+HERDR_OMZ_REPORT=false
 
 # User configuration
 
@@ -225,14 +226,57 @@ v() {
   fi
 }
 
-@() {
-  local request="$*"
-  local system_prompt=$(cat ~/.at_prompt)
-  printf "⏳ thinking... "
-  local cmd=$(claude -p --model haiku "$system_prompt <request>$request<end>" | head -1)
-  printf "\r\033[K"  # clear the thinking line
-  print -z "$cmd"
+# cd to a git worktree of the current repo, picked with fzf (arg pre-filters)
+wt() {
+  local list dir
+  list=$(git worktree list --porcelain 2>/dev/null | sed -n 's/^worktree //p')
+  if [[ -z "$list" ]]; then
+    echo "Not inside a git repository." >&2
+    return 1
+  fi
+  dir=$(print -r -- "$list" | fzf --layout=reverse --height=40% --border \
+    --prompt="🌳 Worktree: " --query="${1:-}" --select-1 --exit-0) || return
+  [[ -n "$dir" ]] && cd "$dir"
 }
+
+# @ <request> -> shell command, prefilled on the next prompt line.
+_at_query() {
+  local request=$1
+  [[ -z $request ]] && return 1
+  local system_prompt=$(<~/.at_prompt)
+  claude -p --model haiku "$system_prompt <request>$request<end>" \
+    </dev/null 2>/dev/null | grep -v '^[[:space:]]*```' | grep -m1 .
+}
+
+# Intercepting at accept-line means zsh never parses the request, which is what
+# lets apostrophes, pipes and redirections through unquoted.
+_at_accept_line() {
+  emulate -L zsh -o extended_glob
+  local line=${BUFFER##[[:space:]]#}
+  if [[ $line != '@'[[:space:]]* ]]; then
+    zle .accept-line
+    return
+  fi
+  local cmd request=${${line#@}##[[:space:]]#}
+  zle -R "⏳ thinking..."
+  cmd=$(_at_query "$request")
+  if [[ -n $cmd ]]; then
+    BUFFER=$cmd
+    CURSOR=${#BUFFER}
+  else
+    zle -M "@: no command returned"
+  fi
+  zle -R
+}
+zle -N accept-line _at_accept_line
+
+# Fallback when the widget isn't in play (scripts, zsh -c); needs quoting.
+_at_cmd() {
+  local cmd=$(_at_query "$*")
+  [[ -z $cmd ]] && { print -u2 "@: no command returned"; return 1 }
+  if [[ -o interactive ]]; then print -z -- "$cmd"; else print -r -- "$cmd"; fi
+}
+alias @='noglob _at_cmd'
 
 ### Override config files path that are not in ~/.config ###
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -243,8 +287,12 @@ export OPENCODE_CONFIG_DIR="${HOME}/.config/opencode"
 #add krew to PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# opencode
-export PATH=/Users/tomhalo/.opencode/bin:$PATH
+# OpenCode is managed by Homebrew.
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Oh My Pi
+export LITELLM_BASE_URL="https://litellm.prod.int.opmed.ai/v1"
+alias omp='command omp update && command omp --allow-home'
 
 # export KUBECONFIG=~/.kube/config
 
@@ -271,4 +319,3 @@ eval "$(zoxide init zsh)"
 
 # Hindsight memory (local Ollama LLM + local embeddings, Docker Postgres) daemon config
 [[ -f "$HOME/hindsight/hindsight.env" ]] && source "$HOME/hindsight/hindsight.env"
-
