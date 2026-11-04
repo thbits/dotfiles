@@ -1,13 +1,13 @@
 {
   "mcpServers": {
-    "awslabs.aws-api-mcp-server": {
+    "aws-mcp": {
       "command": "uvx",
       "args": [
-        "awslabs.aws-api-mcp-server@latest"
+        "mcp-proxy-for-aws@1.6.4",
+        "https://aws-mcp.us-east-1.api.aws/mcp",
+        "--metadata", "AWS_REGION=${AWS_REGION:-us-east-1}",
+        "--profile", "dev", "prod"
       ],
-      "env": {
-        "AWS_REGION": "${AWS_REGION:-us-east-1}"
-      },
       "disabled": false,
       "autoApprove": []
     },

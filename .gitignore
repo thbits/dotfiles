@@ -3,6 +3,13 @@ k9s/.config/k9s/screen-dumps/
 tmux/.config/tmux/plugins/
 grafanactl/.config/grafanactl/config.yaml
 
+# OpenCode runtime files and local secrets.
+opencode/.config/opencode/node_modules/
+opencode/.config/opencode/package.json
+opencode/.config/opencode/package-lock.json
+opencode/.config/opencode/bun.lock
+opencode/.env
+
 # claudecode: Claude Code writes runtime state into ~/.claude, so track only
 # the config files and ignore everything else.
 claudecode/.claude/**
@@ -15,3 +22,7 @@ claudecode/.claude/**
 !claudecode/.claude/themes/*.json
 !claudecode/.claude/agents/
 !claudecode/.claude/agents/*.md
+!claudecode/.claude/commands/
+!claudecode/.claude/commands/*.md
+!claudecode/.claude/skills/
+!claudecode/.claude/skills/**

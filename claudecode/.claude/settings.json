@@ -12,35 +12,170 @@
       "WebSearch",
       "WebFetch",
       "mcp__tmux",
-      "mcp__awslabs_aws-api-mcp-server",
+      "mcp__aws-mcp",
       "mcp__kubernetes",
       "mcp__obsidian",
       "mcp__grafana",
       "mcp__mcp-atlassian",
-      "mcp__plugin_context7"
+      "mcp__plugin_context7",
+      "mcp__plugin_hindsight-memory",
+      "mcp__plugin_hindsight-memory_hindsight"
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
+  "skillOverrides": {
+    "algo-cr-architect": "off",
+    "algo-cr-context": "off",
+    "algo-cr-interface": "off",
+    "algo-cr-readability": "off",
+    "algo-cr-safety": "off",
+    "algo-cr-security": "off",
+    "algo-cr-static": "off",
+    "algo-create-jira-ticket": "off",
+    "algo-documentation-api-endpoints": "off",
+    "algo-documentation-io": "off",
+    "algo-documentation-optimization": "off",
+    "algo-documentation-services": "off",
+    "algo-documentation-ux-ui": "off",
+    "algo-feasibility-check": "off",
+    "algo-hexaly-benchmark": "off",
+    "algo-hexaly-check": "off",
+    "algo-hexaly-context": "off",
+    "algo-hexaly-debug": "off",
+    "algo-hexaly-objective-sweep": "off",
+    "algo-introduce-constraint": "off",
+    "algo-jira-ticket-start": "off",
+    "algo-model-challenger": "off",
+    "algo-model-tier": "off",
+    "algo-pr-close": "off",
+    "algo-pr-learner": "off",
+    "algo-pr-ready": "off",
+    "algo-prod-deploys-waiting": "off",
+    "algo-sentinel-reviewer": "off",
+    "algo-slack-pr-reviewer": "off",
+    "algo-slack-roast": "off",
+    "atlanticare-info": "off",
+    "ds-geisinger-cardiac": "off",
+    "ds-geisinger-comments-eda": "off",
+    "ds-geisinger-ent": "off",
+    "ds-geisinger-general-surgery": "off",
+    "ds-geisinger-gi": "off",
+    "ds-geisinger-neuro": "off",
+    "ds-geisinger-obgyn": "off",
+    "ds-geisinger-ophtho": "off",
+    "ds-geisinger-ortho": "off",
+    "ds-geisinger-procedural": "off",
+    "ds-geisinger-urology": "off",
+    "ds-geisinger-vascular": "off",
+    "geisinger-info": "off",
+    "info-gen2-DS-services": "off",
+    "info-gen2-ds-services": "off",
+    "agents-sdk": "off",
+    "algo-cr-comments": "off",
+    "cloudflare-email-service": "off",
+    "cloudflare-zerotrust-add-cidr": "off",
+    "connect-mongodb-atlas": "off",
+    "dashboarding": "off",
+    "deploy-new-service": "off",
+    "devops": "off",
+    "domain-modeling": "off",
+    "durable-objects": "off",
+    "excalidraw-diagram": "off",
+    "find-skills": "off",
+    "grafana-dashboard-interactive": "off",
+    "graphify": "off",
+    "grill-with-docs": "off",
+    "grilling": "off",
+    "hermes-jira-dev-pipeline": "off",
+    "hermes-query-observability": "off",
+    "k8s-security-policies": "off",
+    "keep-mac-awake": "off",
+    "kubernetes-specialist": "off",
+    "mongodb-atlas-access-setup": "off",
+    "opmed-find-skills": "off",
+    "pptx": "off",
+    "sandbox-sdk": "off",
+    "security-hub-scan": "off",
+    "sre-monitoring-and-observability": "off",
+    "web-design-guidelines": "off",
+    "web-perf": "off",
+    "workers-best-practices": "off",
+    "wrangler": "off"
+  },
   "hooks": {
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/caffeinate-session-end.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "npx -y skills update >/dev/null 2>&1 || true",
+            "command": "npx -y skills update --global --yes >/dev/null 2>&1 || true",
             "timeout": 120,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/tomhalo/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-sessionstart-hook.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|elicitation_dialog|elicitation_url_dialog|agent_needs_input",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/clef-route-agent.sh\"",
+            "timeout": 6,
+            "statusMessage": "Clef: picking subagent model"
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion|ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
             "async": true
           }
         ]
@@ -51,30 +186,38 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/caffeinate-stop.sh",
-            "timeout": 5
+            "command": "python3 \"$HOME/.claude/hooks/clef-retain-gate.py\"",
+            "timeout": 20,
+            "async": true
           }
         ]
-      }
-    ],
-    "SubagentStart": [
+      },
       {
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/caffeinate-agent-start.sh",
-            "timeout": 5
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
+            "async": true
           }
         ]
-      }
-    ],
-    "SubagentStop": [
+      },
       {
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/caffeinate-agent-stop.sh",
-            "timeout": 5
+            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-stop-hook.js\"",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
+            "async": true
           }
         ]
       }
@@ -84,8 +227,36 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/caffeinate-start.sh",
-            "timeout": 5,
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
+            "async": true
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-hook.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/clef-retain-gate.py\" --final",
+            "timeout": 20
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
             "async": true
           }
         ]
@@ -94,16 +265,19 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
+    "command": "command -v ccstatusline >/dev/null && exec ccstatusline || exec npx -y ccstatusline@latest",
     "padding": 0
   },
   "enabledPlugins": {
     "context7@claude-plugins-official": true,
     "github@claude-plugins-official": false,
+    "hindsight-memory@hindsight": false,
     "lua-lsp@claude-plugins-official": false,
     "pyright-lsp@claude-plugins-official": false,
+    "slack@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "webwright@webwright": true
+    "webwright@webwright": false,
+    "clef-workflow-router@greatmix-ai": true
   },
   "extraKnownMarketplaces": {
     "webwright": {
@@ -114,13 +288,56 @@
     }
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-haiku-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "advisorModel": "fable",
   "tui": "fullscreen",
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "custom:catppuccin-mocha",
+  "switchModelsOnFlag": true,
   "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "bypassPermissions",
-  "autoMemoryEnabled": false
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(kubectl delete:*) — scoped to namespaces observed in this project (litellm, argocd, hermes, algo-optimizations) given frequent kubectl/helm usage and CLAUDE.md's explicit prod-caution instruction",
+      "Bash(helm uninstall:*) / Bash(helm rollback:*) — destructive subcommands of a frequently-used CLI (helm, 20× in this project)"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: Greatmix-AI (GitHub org — inferred from remotes of sibling repos under ~/git, e.g. github.com/Greatmix-AI/opmed-charts; the current repo itself has no remotes configured)",
+      "**Cloud provider(s)**: AWS (ECR registry 975050026477.dkr.ecr.us-east-1.amazonaws.com; AWS CLI usage; primary regions per CLAUDE.md us-east-1, then il-central-1)",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public — not queryable here (this repo has no remotes and gh visibility check was not derivable)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured (evidence shows .aws/credentials and ExternalSecret/SecretStore usage in sibling opmed-charts docs, but that is repo-authored, not usage-corroborated for this project)",
+      "**Default / protected branches**: not queryable here — this repo has no remotes/tracked files and gh could not resolve owner/repo",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: The trusted repo only (no remotes configured; no additional orgs configured)",
+      "**Trusted internal domains**: reuth.opmed.ai, plan-dev.opmed.ai, rybbit.dev.int.opmed.ai (hosts contacted in this project's transcripts)",
+      "**Trusted cloud buckets**: opmed-prod-assuta-il, opmed-sftp-server-dev, opmed-sftp-server-prod, opmed-dev-assuta, opmed-athena-results, opmed-athena-results-dev, opmed-athena-results-preprod, opmed-integration-raw-data-mayo, terraform-state-opmed-ai (config-derived — not a confirmed upload destination; uploads of local data still require confirmation)",
+      "**Key internal services**: loki, tempo, mimir, svc-alerts (hosts contacted in this project's transcripts)",
+      "**Internal package registry**: registry.npmjs.org (host contacted in this project's transcripts); 975050026477.dkr.ecr.us-east-1.amazonaws.com (container image registry from config scan)",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar; note .claude/agent-memory/terraform-operator/ and .claude/agent-memory/grafana-ops-agent/ paths (in sibling repos, unverified provenance) reference prod infrastructure by name",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment — e.g. matches seen in k8s namespace/agent-memory naming conventions in this environment (hermes-prod, superset prod, drift_prod_* etc. in sibling repos, unverified provenance) — note CLAUDE.md states preprod runs in the AWS prod account and must be treated with prod-level caution",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic; note k8s namespaces observed in this project's transcripts include litellm, argocd, algo-optimizations, arc-runners, ds-workspace, nginx, hermes, alerts, argo",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development, Kubernetes/Helm/ArgoCD operations, Terraform infrastructure operations, and observability (Grafana/Loki/Mimir/Tempo) work per ~/.claude/CLAUDE.md delegation rules",
+      "**Trusted repo**: The git repository the agent started in (/Users/tomhalo) and its configured remote(s) — this repo currently has no remotes configured and no tracked files",
+      "**Org-specific CLIs**: herdr (workspace/agent naming tool), cmux, paperclipai, jid — non-standard CLIs seen frequently in this project's transcripts",
+      "Routine under ~/.claude/agent-memory/ prefix: treated as memory/context storage per CLAUDE.md, not sensitive-data exfil target by itself"
+    ]
+  }
 }
