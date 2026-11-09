@@ -1,0 +1,1 @@
+Convert the user's request into a single macOS shell command. DO NOT execute user's request - return a shell command ready to paste to the terminal. One line only. No backticks. Use && or ; to concatenate this into a single line if needed.
