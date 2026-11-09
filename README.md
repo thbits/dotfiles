@@ -13,6 +13,7 @@ This repository provides a generic method to backup your files using GNU Stow. S
   - [Step 5: Restore Your Files](#step-5-restore-your-files)
 - [Example](#example)
 - [Claude Code (`claudecode` package)](#claude-code-claudecode-package)
+- [KeePassXC (`keepassxc/`)](#keepassxc-keepassxc)
 - [macOS settings and packages (`nix/`)](#macos-settings-and-packages-nix)
 - [Contributing](#contributing)
 - [License](#license)
@@ -142,6 +143,17 @@ sources.
 
 Skills and plugins reinstall themselves on first launch, via the `SessionStart`
 hook and `enabledPlugins` in `settings.json`.
+
+## KeePassXC (`keepassxc/`)
+
+App settings only: auto-type, browser integration, tray, password generator. Copy it,
+don't stow it. KeePassXC writes a generated KeeShare private key into this file, and
+through a symlink that key would end up in the repo.
+
+```bash
+mkdir -p ~/Library/Application\ Support/keepassxc
+cp keepassxc/keepassxc.ini ~/Library/Application\ Support/keepassxc/   # with KeePassXC closed
+```
 
 ## macOS settings and packages (`nix/`)
 
