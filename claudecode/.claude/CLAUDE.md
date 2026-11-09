@@ -27,15 +27,23 @@
 - Primary regions: us-east-1, then il-central-1. Check these first when searching for resources.
 
 # Long-term memory (hindsight)
-- Hindsight is your ONLY memory. Nothing else persists between sessions — no context carries over except what's in the hindsight bank.
-- Writing is automatic: the Hindsight Coding Agents hooks retain each session on Stop into the shared `claude_code` bank (tagged `project:<repo>`), and inject recalled memories on a session's first prompt — that's orientation, not a lookup. You don't need to save manually; for deliberate writes use `mcp__hindsight-bank__retain` (or `hindsight_ingest_document` for documents and corrections), and the `hindsight_*knowledge_page*` tools for curated knowledge pages.
-- When starting work on something, recall first (`mcp__hindsight-bank__recall`): was this already worked on, what was decided, and what happened after? Don't rediscover ground already covered. `hindsight_reflect` is an LLM synthesis (slow, ~40s) — use recall for facts.
-- Before asking me a question, recall whether it was already answered. Answered consistently several times → treat that as the answer and proceed. Found only once (or answers conflict) → don't trust it as settled; ask me.
-- Treat recall as a working tool used throughout a task, not just a startup step. Whenever uncertainty comes up mid-work — why something is configured this way, whether an approach was already tried, what the right value is — recall before guessing.
-- Compose the query with concrete anchors (env, stack, file, resource, error) AND the intent. Recall ranks on keyword + semantic match, so naming the actual entities pulls far better hits than a vague phrase.
-- Always pull the outcome, not just the how: query for what was decided AND what happened after — reversals, rollbacks, warnings, "this broke X". `world`-type memories carry the consequence ("… | When: date | Involving: who | outcome"). Surface any negative hit before repeating the action.
-- Recall proactively before continuing prior work or mirroring another environment. Triggers: "too", "also", "same as dev", "like we did", "again", or any change echoing another env.
-- Recall output blows the token cap (a large entities map trails every response). Save it and extract with jq/python from the file rather than re-querying.
+- Hindsight is your ONLY memory. Nothing else persists between sessions; what isn't in the shared Hindsight bank is gone.
+- **The bank is shared with every engineer and holds work knowledge only.** Never save personal preferences, secrets, credentials or patient data.
+- **Writing is automatic.** The Hindsight Coding Agents hooks retain each session on Stop (tagged `project:<repo>`).
+  - For a deliberate write (an external document, durable findings, a decision record) use `hindsight_ingest_document`. Start the title with today's date so it can't collide with another engineer's.
+  - **Corrections:** when you verify a memory is wrong or stale, ingest a "Correction: <topic>" document saying what memory claimed, what is true now, and the evidence.
+- **Reading has three layers.** Use them in order:
+  1. **Injected recall:** the hook injects memories recalled for the session's first prompt. That's orientation, not a lookup.
+  2. **`hindsight_search_knowledge_pages(query)` is the first stop.** These are curated, continuously-updated pages (components, concepts, conventions, decisions, initiatives). Then `hindsight_read_knowledge_page(<id>)` on the ones that matter, following `[[page:<id>]]` links.
+  3. **`hindsight_reflect(query)` when the pages are too shallow:** deep reasoning over the full memory for the why and exact values. It's slow (~40s), so use it deliberately.
+- **When starting work,** search the pages: was this already worked on, what was decided, and what happened after? Don't rediscover ground already covered.
+- **Before asking me a question,** check whether it was already answered. Answered consistently → treat that as the answer and proceed. Found only once, or answers conflict → ask me.
+- **Use memory throughout a task, not just at startup.** Whenever uncertainty comes up mid-work (why something is configured this way, whether an approach was already tried, what the right value is), search before guessing.
+- **Write queries with concrete anchors and the intent:** env, stack, file, resource, error. Naming the actual entities pulls far better hits than a vague phrase.
+- **Always pull the outcome, not just the how:** what was decided and what happened after (reversals, rollbacks, warnings, "this broke X"). Surface any negative hit before repeating the action.
+- **Search proactively before continuing prior work or mirroring another environment.** Triggers: "too", "also", "same as dev", "like we did", "again", or any change echoing another env.
+- **What memory says is a past record, not a live reading.** Check a claim that something is fixed, passing or working against the code before relying on it, and say so when the two disagree.
+- `hindsight_sync_status` and `hindsight_diagnose` show whether the memory pipeline is healthy.
 
 # Git discipline
 - Never commit or push unless I explicitly ask. Never force-push.
@@ -44,3 +52,13 @@
 # Verify before done
 - Before saying a task is complete, run the relevant lint/tests/plan and report the actual output. Never claim "should work" without checking.
 - If verification fails, say so plainly with the failing output — don't soften it.
+
+# Shell (zsh, not bash)
+The Bash tool runs zsh. These are the failures seen most in past sessions:
+- Never use `path` as a variable name (`for path in`, `read ... path`, `path=`): it's tied to `$PATH` and wipes it, so every command fails with `command not found: sed/head/dirname`. Same for `status` (read-only), `cdpath`, `fpath`, `manpath`. Use `p`, `file`, `rc`.
+- Quote every glob pattern: `--include='*.tf'`, `-name '*.yaml'`, `'url?x=1'`, `'pkg[extra]'`, `'{.items[*]}'`. Unquoted, an unmatched glob is a hard error (`no matches found`). Prefer the Grep/Glob tools.
+- A word starting with `=` expands to a command path: `echo =====` fails with `==== not found`. Use `echo '====='` or `echo ---`.
+- Brace a variable when `:` or `[` follows it: `"${t}:src/x"`, `"${p}[x]"`. Unbraced, `$t:s…` is a zsh modifier (`bad substitution`) and `$p[…]` is a subscript (`invalid subscript`).
+- An unquoted `$var` is not word-split: `for d in $D` loops once over the whole string. Use `for d in ${=D}`, `while read -r d; do …; done <<< "$D"`, or `xargs`.
+- `log` is a zsh builtin, so call macOS log as `/usr/bin/log stream`. Arrays are 1-indexed, and `read -a` is `read -A`.
+- My zshrc aliases and functions are loaded (`k`, `h`, `d`, `z`, `cat`→bat, `kubectl`→kubecolor). Don't define functions with those names (`k() {…}` gives a parse error); pick unique names or use `command kubectl`.

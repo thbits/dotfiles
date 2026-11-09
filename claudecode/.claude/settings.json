@@ -124,15 +124,6 @@
             "timeout": 10
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-sessionstart-hook.js\"",
-            "timeout": 30
-          }
-        ]
       }
     ],
     "PermissionRequest": [
@@ -186,27 +177,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$HOME/.claude/hooks/clef-retain-gate.py\"",
-            "timeout": 20,
-            "async": true
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
             "command": "'/opt/homebrew/bin/naviclaude' hook # naviclaude-hook",
             "async": true
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-stop-hook.js\"",
-            "timeout": 60
           }
         ]
       }
@@ -231,27 +203,9 @@
             "async": true
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/tomhalo/.hindsight/coding-agents/dist/claude-hook.js\"",
-            "timeout": 30
-          }
-        ]
       }
     ],
     "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 \"$HOME/.claude/hooks/clef-retain-gate.py\" --final",
-            "timeout": 20
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -277,7 +231,8 @@
     "slack@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
     "webwright@webwright": false,
-    "clef-workflow-router@greatmix-ai": true
+    "clef-workflow-router@greatmix-ai": true,
+    "opmed-hindsight@greatmix-ai": true
   },
   "extraKnownMarketplaces": {
     "webwright": {
