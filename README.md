@@ -146,7 +146,8 @@ hook and `enabledPlugins` in `settings.json`.
 ## macOS settings and packages (`nix/`)
 
 [nix-darwin](https://github.com/nix-darwin/nix-darwin) manages everything that is
-the Mac rather than a dotfile: Dock, Finder, keyboard, trackpad and clock settings,
+the Mac rather than a dotfile: Dock, Finder, keyboard and input sources, trackpad,
+window tiling and menu bar settings,
 Touch ID for `sudo` (works inside tmux too), and every Homebrew tap, formula and cask.
 Dotfiles are still stowed as above; nix-darwin doesn't touch them.
 
@@ -174,8 +175,6 @@ If the first switch stops on "unexpected files in /etc", rename the files it lis
 
 With Cloudflare WARP on, its TLS inspection can break downloads from `cache.nixos.org`.
 Point Nix at the WARP root CA (`ssl-cert-file = /path/to/ca.pem` in `/etc/nix/nix.custom.conf`).
-
-Not covered: keyboard input sources (ABC + Hebrew), set them in System Settings.
 
 ### Day to day
 

@@ -10,7 +10,9 @@
       upgrade = false;
     };
 
-    taps = [
+    # Homebrew 6 refuses untrusted third-party taps (HOMEBREW_REQUIRE_TAP_TRUST),
+    # which aborts activation, so every tap here is marked trusted.
+    taps = map (name: { inherit name; trusted = true; }) [
       "deskflow/tap"
       "allcloud-io/tools"
       "aws/tap"
@@ -19,6 +21,11 @@
       "hamed-elfayome/claude-usage"
       "thbits/tap"
       "hashicorp/tap"
+      "aboudjem/tap"
+      "can1357/tap"
+      "lusingander/tap"
+      "rajatjindal/tap"
+      "robusta-dev/homebrew-krr"
     ];
 
     brews = [
@@ -69,7 +76,6 @@
       "go"
       "ollama"
       "can1357/tap/omp" # Oh My Pi
-      "herdr"
 
       # GNU userland
       "watch"
@@ -119,7 +125,6 @@
       "sublime-text"
       "cursor"
       "input-source-pro"
-      "rectangle"
       "dockdoor"
       "aboudjem/tap/sleepless"
       "lunar"

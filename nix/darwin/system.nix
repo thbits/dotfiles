@@ -40,7 +40,9 @@
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
       KeyRepeat = 2;
-      InitialKeyRepeat = 30;
+      InitialKeyRepeat = 25;
+      # Holding a key repeats it (e.g. hjkl in nvim) instead of opening the accent picker.
+      ApplePressAndHoldEnabled = false;
     };
 
     trackpad = {
@@ -49,8 +51,21 @@
       TrackpadThreeFingerDrag = false;
     };
 
-    WindowManager.EnableTiledWindowMargins = false;
+    # Rectangle handles window tiling, so macOS's own drag-to-edge tiling is off.
+    WindowManager = {
+      EnableTiledWindowMargins = false;
+      EnableTilingByEdgeDrag = false;
+      EnableTopTilingByEdgeDrag = false;
+      EnableTilingOptionAccelerator = false;
+    };
 
     menuExtraClock.ShowSeconds = true;
+    controlcenter.Bluetooth = true; # show in menu bar
+
+    CustomUserPreferences."com.apple.HIToolbox".AppleEnabledInputSources = [
+      { InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 252; "KeyboardLayout Name" = "ABC"; }
+      { InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = -18432; "KeyboardLayout Name" = "Hebrew"; }
+      { InputSourceKind = "Non Keyboard Input Method"; "Bundle ID" = "com.apple.CharacterPaletteIM"; }
+    ];
   };
 }
