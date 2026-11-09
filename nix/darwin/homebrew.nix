@@ -65,6 +65,8 @@
       "yq"
       "gh"
       "node"
+      "yarn"
+      "tree-sitter-cli" # nvim-treesitter (main branch) compiles parsers with it
       "pgcli"
       "mongosh"
       "jira-cli"
