@@ -13,6 +13,7 @@ This repository provides a generic method to backup your files using GNU Stow. S
   - [Step 5: Restore Your Files](#step-5-restore-your-files)
 - [Example](#example)
 - [Claude Code (`claudecode` package)](#claude-code-claudecode-package)
+- [macOS settings and packages (`nix/`)](#macos-settings-and-packages-nix)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -141,3 +142,44 @@ sources.
 
 Skills and plugins reinstall themselves on first launch, via the `SessionStart`
 hook and `enabledPlugins` in `settings.json`.
+
+## macOS settings and packages (`nix/`)
+
+[nix-darwin](https://github.com/nix-darwin/nix-darwin) manages everything that is
+the Mac rather than a dotfile: Dock, Finder, keyboard, trackpad and clock settings,
+Touch ID for `sudo` (works inside tmux too), and every Homebrew tap, formula and cask.
+Dotfiles are still stowed as above; nix-darwin doesn't touch them.
+
+- `nix/darwin/system.nix`: macOS defaults and Touch ID
+- `nix/darwin/homebrew.nix`: Homebrew packages (replaces the old Brewfile)
+
+**Removing a package from `homebrew.nix` uninstalls it on the next switch**, and so
+does anything installed with a plain `brew install` that isn't listed. Add it to the
+file first, then switch.
+
+### New Mac
+
+```bash
+xcode-select --install
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git clone https://github.com/thbits/dotfiles.git ~/personal/git/dotfiles
+
+# First run bootstraps darwin-rebuild itself
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/personal/git/dotfiles/nix#tom-mbp
+```
+
+If the first switch stops on "unexpected files in /etc", rename the files it lists
+(e.g. `sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin`) and run it again.
+
+With Cloudflare WARP on, its TLS inspection can break downloads from `cache.nixos.org`.
+Point Nix at the WARP root CA (`ssl-cert-file = /path/to/ca.pem` in `/etc/nix/nix.custom.conf`).
+
+Not covered: keyboard input sources (ABC + Hebrew), set them in System Settings.
+
+### Day to day
+
+```bash
+sudo darwin-rebuild switch --flake ~/personal/git/dotfiles/nix#tom-mbp   # apply
+cd ~/personal/git/dotfiles/nix && nix flake update                       # bump nixpkgs / nix-darwin pins
+```
