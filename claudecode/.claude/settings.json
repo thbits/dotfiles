@@ -6,6 +6,7 @@
     "commit": "",
     "pr": ""
   },
+  "cleanupPeriodDays": 365,
   "permissions": {
     "allow": [
       "Bash",
