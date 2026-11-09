@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
+				theme = "catppuccin-nvim", -- follows the active flavor; plain "catppuccin" was renamed upstream
 				globalstatus = true, -- Use global status line
 				component_separators = "|",
 				section_separators = "",

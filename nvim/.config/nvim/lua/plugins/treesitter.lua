@@ -49,5 +49,13 @@ return {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
+    init = function()
+      -- Nvim 0.12's get_parser returns nil instead of erroring, so the plugin would attach without a parser and crash.
+      vim.g.rainbow_delimiters = {
+        condition = function(bufnr)
+          return vim.treesitter.get_parser(bufnr, nil, { error = false }) ~= nil
+        end,
+      }
+    end,
   },
 }
