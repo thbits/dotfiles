@@ -115,16 +115,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "^(startup|resume|clear|compact|fork)$",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/tomhalo/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10
-          }
-        ]
       }
     ],
     "PermissionRequest": [
@@ -292,7 +282,7 @@
       "### User-specific",
       "**Primary use of Claude Code**: software development, Kubernetes/Helm/ArgoCD operations, Terraform infrastructure operations, and observability (Grafana/Loki/Mimir/Tempo) work per ~/.claude/CLAUDE.md delegation rules",
       "**Trusted repo**: The git repository the agent started in (/Users/tomhalo) and its configured remote(s) — this repo currently has no remotes configured and no tracked files",
-      "**Org-specific CLIs**: herdr (workspace/agent naming tool), cmux, paperclipai, jid — non-standard CLIs seen frequently in this project's transcripts",
+      "**Org-specific CLIs**: cmux, paperclipai, jid — non-standard CLIs seen frequently in this project's transcripts",
       "Routine under ~/.claude/agent-memory/ prefix: treated as memory/context storage per CLAUDE.md, not sensitive-data exfil target by itself"
     ]
   }

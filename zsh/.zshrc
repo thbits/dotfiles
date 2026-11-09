@@ -78,13 +78,12 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils herdr)
+plugins=(kubectl compleat zsh-autosuggestions helm docker cp fzf-tab ohmyzsh-full-autoupdate gnu-utils)
 
 # Load before plugin to fix fzf search history when in insert mode when using zsh-vi-mode
 # ZVM_INIT_MODE=sourcing
 
 source $ZSH/oh-my-zsh.sh
-HERDR_OMZ_REPORT=false
 
 # User configuration
 
