@@ -13,6 +13,7 @@ This repository provides a generic method to backup your files using GNU Stow. S
   - [Step 5: Restore Your Files](#step-5-restore-your-files)
 - [Example](#example)
 - [Claude Code (`claudecode` package)](#claude-code-claudecode-package)
+- [naviclaude (`naviclaude/`)](#naviclaude-naviclaude)
 - [KeePassXC (`keepassxc/`)](#keepassxc-keepassxc)
 - [macOS settings and packages (`nix/`)](#macos-settings-and-packages-nix)
 - [Contributing](#contributing)
@@ -143,6 +144,15 @@ sources.
 
 Skills and plugins reinstall themselves on first launch, via the `SessionStart`
 hook and `enabledPlugins` in `settings.json`.
+
+## naviclaude (`naviclaude/`)
+
+Only `config.yaml`. Create the directory first so stow links the file, not the
+whole directory (naviclaude writes its state files next to it):
+
+```bash
+mkdir -p ~/.config/naviclaude && stow -t ~ naviclaude
+```
 
 ## KeePassXC (`keepassxc/`)
 

@@ -26,3 +26,7 @@ claudecode/.claude/**
 !claudecode/.claude/commands/*.md
 !claudecode/.claude/skills/
 !claudecode/.claude/skills/**
+
+# naviclaude: track only config.yaml; the app writes its state next to it.
+naviclaude/.config/naviclaude/*
+!naviclaude/.config/naviclaude/config.yaml

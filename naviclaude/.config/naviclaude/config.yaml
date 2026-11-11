@@ -1,0 +1,48 @@
+keys:
+    focus: enter
+    jump: f
+    search: /
+    new_session: "n"
+    new_tmux_session: "N"
+    kill_session: K
+    rename_session: r
+    detail: d
+    stats: s
+    help: '?'
+    quit: q
+    toggle_changed: F
+    move_window: m
+    pin_session: p
+sidebar_width: 24
+refresh_interval: 200ms
+closed_session_hours: 24
+popup_width: 85
+popup_height: 85
+resume_in_current_session: true
+process_names:
+    - claude
+collapse_after_hours: 8
+active_window_secs: 5
+cpu_active_threshold: 5
+theme: catppuccin-mocha
+claude_command: claude
+window_name: '{project}'
+new_session_dir: ""
+group_sort_order: name
+session_sort_order: manual
+check_for_updates: true
+editor: ""
+focus_last_session: true
+remember_group_state: true
+restore_sessions: true
+notifications:
+    enabled: true
+    request_sound: ""
+    done_sound: ""
+    done_sound_when_focused: false
+    volume: 1
+    cooldown: 2s
+    window_marker: true
+    waiting_marker: '#[fg=yellow,bold]#[nobold]'
+    done_marker: '#[fg=green,bold]#[nobold]'
+    busy_marker: '#[fg=blue,bold]#[nobold]'
